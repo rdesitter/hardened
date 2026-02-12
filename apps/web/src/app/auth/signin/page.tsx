@@ -5,6 +5,7 @@ import { signIn } from 'next-auth/react';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
+  const [consent, setConsent] = useState(false);
   const [sent, setSent] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -39,9 +40,25 @@ export default function SignInPage() {
             required
             className="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white placeholder-gray-500 focus:border-green-400 focus:outline-none focus:ring-1 focus:ring-green-400"
           />
+          <label className="flex items-start gap-3 text-sm text-gray-400">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              required
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-600 bg-gray-800 text-green-500 focus:ring-green-400 focus:ring-offset-0"
+            />
+            <span>
+              I agree to the{' '}
+              <a href="/terms" target="_blank" className="text-green-400 hover:underline">Terms of Service</a>
+              {' '}and{' '}
+              <a href="/privacy" target="_blank" className="text-green-400 hover:underline">Privacy Policy</a>
+            </span>
+          </label>
           <button
             type="submit"
-            className="rounded-lg bg-green-500 px-6 py-3 font-semibold text-gray-950 transition-colors hover:bg-green-400"
+            disabled={!consent}
+            className="rounded-lg bg-green-500 px-6 py-3 font-semibold text-gray-950 transition-colors hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Send magic link
           </button>

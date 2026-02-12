@@ -26,7 +26,7 @@ Toute la documentation technique est dans le dossier `/docs/`. Lis TOUS les fich
 - Hono (Node.js) — API backend + scan engine
 - PostgreSQL 16 + Drizzle ORM — base de données
 - Recharts — graphiques d'historique des scores
-- Tailwind CSS v4 — styling
+- Tailwind CSS v4 + @tailwindcss/typography — styling + prose
 - Monorepo avec npm workspaces
 
 ## Structure du monorepo
@@ -60,8 +60,12 @@ shipsafe/
 │           │   ├── layout.tsx, page.tsx (landing: hero + benefits + sample report + footer)
 │           │   ├── scan/[id]/page.tsx (score circle SVG + checks groupés expandables + chart)
 │           │   ├── dashboard/ (page.tsx server + dashboard-scans.tsx client cards + sparklines)
-│           │   ├── auth/signin/page.tsx (formulaire email magic link)
+│           │   ├── auth/signin/page.tsx (formulaire email magic link + checkbox consentement)
 │           │   ├── auth/verify/page.tsx (page "vérifiez votre email")
+│           │   ├── privacy/page.tsx (politique de confidentialité SSR + TOC)
+│           │   ├── terms/page.tsx (conditions d'utilisation SSR + TOC)
+│           │   ├── legal/page.tsx (mentions légales SSR bilingue)
+│           │   ├── cookies/page.tsx (politique cookies SSR)
 │           │   ├── pricing/page.tsx (page tarifs Free / Pro)
 │           │   ├── settings/page.tsx + portal-button.tsx (compte + billing)
 │           │   ├── api/auth/[...nextauth]/route.ts (Auth.js handlers)
@@ -133,7 +137,7 @@ npm run db:push       # appliquer le schema directement
   - Formulaire URL centré avec bouton "Scan now" + spinner loading
   - Section 3 bénéfices (Security Score, Detailed Fixes, Weekly Monitoring) avec icônes SVG
   - Section sample report : score circle SVG (62/100) + 8 checks exemple
-  - Footer minimal
+  - Footer avec liens : Pricing, Privacy, Terms, Legal, Cookies
 - Page /scan/[id] :
   - Score dans un cercle SVG coloré (vert ≥70, orange ≥40, rouge <40) avec stroke animé
   - URL + résumé (passed/failed/ms) + bouton Share avec icône
@@ -196,5 +200,20 @@ npm run db:push       # appliquer le schema directement
   - Page /scan/[id] Free : bloc "Upgrade to Pro to track your score over time"
   - Détection du plan côté client via présence de '__PRO_ONLY__' dans les fixes
 
+- Pages légales (prose-lg prose-invert, @tailwindcss/typography) :
+  - /privacy : Privacy Policy — SSR, prose-lg, TOC 14 sections avec ancres, tables (legal basis, retention, sub-processors)
+  - /terms : Terms of Service — SSR, prose-lg, TOC 14 sections avec ancres
+  - /legal : Legal Notice / Mentions légales — bilingue FR/EN
+  - /cookies : Cookie Policy — tableau des 5 cookies (Auth.js + Stripe), code inline vert
+  - Typographie : h1 text-4xl/5xl, h2 mt-16 + border-b séparateur, h3 mt-10, paragraphes leading-relaxed text-gray-300, strong en blanc
+  - TOC : rounded-2xl, leading-8, 2 colonnes, hover vert
+  - Placeholders [PRÉNOM NOM], [HÉBERGEUR] etc. à remplacer avant mise en prod
+  - Dates "Last updated: February 12, 2026", URL https://shipsafe.app déjà remplacés
+  - Footer landing page mis à jour avec liens vers les 4 pages légales
+  - Checkbox consentement obligatoire sur /auth/signin : "I agree to the Terms of Service and Privacy Policy"
+  - Bouton "Send magic link" désactivé (disabled + opacity) tant que checkbox non cochée
+  - Liens Terms/Privacy ouvrent dans un nouvel onglet (target="_blank")
+
 ### Pas encore fait
 - Page about
+- Remplacer les placeholders [PRÉNOM NOM], [HÉBERGEUR] dans les pages légales

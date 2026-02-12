@@ -148,6 +148,10 @@ export default function HomePage() {
           <p>ShipSafe — Security audit for AI-generated apps</p>
           <div className="flex gap-4">
             <a href="/pricing" className="hover:text-gray-300">Pricing</a>
+            <a href="/privacy" className="hover:text-gray-300">Privacy</a>
+            <a href="/terms" className="hover:text-gray-300">Terms</a>
+            <a href="/legal" className="hover:text-gray-300">Legal</a>
+            <a href="/cookies" className="hover:text-gray-300">Cookies</a>
           </div>
         </div>
       </footer>
