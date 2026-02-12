@@ -97,6 +97,7 @@ scansRouter.get('/', async (c) => {
       url: scans.url,
       status: scans.status,
       score: scans.score,
+      isMonitoring: scans.isMonitoring,
       createdAt: scans.createdAt,
     })
     .from(scans)

@@ -4,6 +4,7 @@ import { logger } from 'hono/logger';
 import { internalAuth } from './middleware/auth.js';
 import { scansRouter } from './routes/scans.js';
 import { reportsRouter } from './routes/reports.js';
+import { scheduleMonitoring, runMonitoring } from './cron/monitoring.js';
 
 const app = new Hono();
 
@@ -23,7 +24,16 @@ app.use('/api/*', internalAuth);
 // Routes
 app.route('/api/scans', scansRouter);
 
+// Debug endpoint — trigger monitoring manually (remove before prod)
+app.get('/api/debug/run-monitoring', async (c) => {
+  const result = await runMonitoring();
+  return c.json({ status: 'ok', ...result });
+});
+
 const port = Number(process.env.PORT) || 4000;
+
+// Start cron jobs
+scheduleMonitoring();
 
 console.log(`ShipSafe API running on port ${port}`);
 

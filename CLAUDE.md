@@ -22,7 +22,7 @@ Toute la documentation technique est dans le dossier `/docs/`. Lis TOUS les fich
 - Next.js 15 (App Router) — front + auth + Stripe webhooks
 - Auth.js v5 (next-auth 5.0.0-beta.30) — authentification magic link
 - Stripe — paiement, abonnements, customer portal
-- Resend — envoi d'emails (magic link)
+- Resend — envoi d'emails (magic link + alertes monitoring)
 - Hono (Node.js) — API backend + scan engine
 - PostgreSQL 16 + Drizzle ORM — base de données
 - Tailwind CSS v4 — styling
@@ -46,6 +46,7 @@ shipsafe/
 │   │       ├── index.ts
 │   │       ├── middleware/ (auth.ts, rate-limit.ts)
 │   │       ├── routes/ (scans.ts, reports.ts)
+│   │       ├── cron/ (monitoring.ts)
 │   │       └── engine/
 │   │           ├── index.ts (runScan orchestrateur)
 │   │           ├── score.ts (calculateScore, calculateSummary)
@@ -111,7 +112,7 @@ npm run db:push       # appliquer le schema directement
 
 ### Fait
 - Monorepo initialisé (npm workspaces, tsconfig, .env)
-- packages/db : schema Drizzle (users, scans, reports), types (CheckResult, ScanResult), client, re-export drizzle-orm helpers (eq, desc, etc.)
+- packages/db : schema Drizzle (users, scans, reports), types (CheckResult, ScanResult), client, re-export drizzle-orm helpers (eq, and, desc, etc.)
 - apps/api : Hono avec health check, middleware auth interne, middleware rate-limit
 - apps/api : routes scans (POST /api/scans, GET /api/scans/:id, GET /api/scans) avec intégration DB
 - apps/api : scan engine avec 10 checks implémentés (26 vérifications individuelles) :
@@ -165,10 +166,20 @@ npm run db:push       # appliquer le schema directement
   - Page /report/[token] : SSR avec generateMetadata() pour les OG tags (titre, description, Twitter card)
   - report-view.tsx : composant client affichant score + checks + fixes complets
   - Bouton "Share report" sur /scan/[id] qui copie l'URL publique dans le presse-papier
+- Monitoring automatique Pro :
+  - cron/monitoring.ts : job node-cron tous les lundis 6h UTC
+  - Récupère le dernier scan de chaque user Pro, relance runScan sur l'URL
+  - Compare ancien vs nouveau : détecte les régressions (check passed → failed)
+  - Envoie un email d'alerte via Resend en cas de régression (score, liste checks, lien rapport)
+  - Scans monitoring stockés en DB avec isMonitoring = true + rapport public auto-créé
+  - GET /api/debug/run-monitoring : endpoint temporaire pour déclencher manuellement (à supprimer avant prod)
+  - Cron enregistré au démarrage de Hono dans index.ts
+- Dashboard /dashboard :
+  - Tableau des scans de l'utilisateur (URL, Score, Status, Source, Date)
+  - Colonne Source : "Manual" (gris) / "Monitoring" (violet) selon isMonitoring
+  - Lien vers /scan/[id] sur chaque URL
+  - État vide avec lien vers la landing page
 
 ### Pas encore fait
 - Page résultat scan : style élaboré, groupement par catégorie
-- Dashboard : afficher la liste des scans de l'utilisateur, résultats, historique
 - Page about
-- Cron monitoring hebdomadaire
-- Alertes email via Resend
