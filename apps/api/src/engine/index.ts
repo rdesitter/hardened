@@ -4,6 +4,13 @@ import { safeCheck } from './utils.js';
 import { checkHttps } from './checks/https.js';
 import { checkSecurityHeaders } from './checks/headers.js';
 import { checkExposedPaths } from './checks/exposed-paths.js';
+import { checkCors } from './checks/cors.js';
+import { checkCookies } from './checks/cookies.js';
+import { checkInfoLeakage } from './checks/info-leakage.js';
+import { checkDns } from './checks/dns.js';
+import { checkTls } from './checks/tls.js';
+import { checkMixedContent } from './checks/mixed-content.js';
+import { checkOpenRedirects } from './checks/open-redirects.js';
 
 const SCAN_TIMEOUT = 30_000;
 
@@ -13,7 +20,14 @@ export async function runScan(url: string): Promise<ScanResult> {
   const checksPromise = Promise.all([
     safeCheck(() => checkHttps(url)),
     safeCheck(() => checkSecurityHeaders(url)),
+    safeCheck(() => checkCors(url)),
+    safeCheck(() => checkCookies(url)),
     safeCheck(() => checkExposedPaths(url)),
+    safeCheck(() => checkInfoLeakage(url)),
+    safeCheck(() => checkDns(url)),
+    safeCheck(() => checkTls(url)),
+    safeCheck(() => checkMixedContent(url)),
+    safeCheck(() => checkOpenRedirects(url)),
   ]);
 
   // Global timeout

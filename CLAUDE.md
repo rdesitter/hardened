@@ -50,7 +50,7 @@ shipsafe/
 │   │           ├── index.ts (runScan orchestrateur)
 │   │           ├── score.ts (calculateScore, calculateSummary)
 │   │           ├── utils.ts (safeFetch, safeCheck)
-│   │           └── checks/ (https.ts, headers.ts, exposed-paths.ts)
+│   │           └── checks/ (https.ts, headers.ts, exposed-paths.ts, cors.ts, cookies.ts, info-leakage.ts, dns.ts, tls.ts, mixed-content.ts, open-redirects.ts)
 │   └── web/                  # Next.js — port 3000
 │       ├── Dockerfile
 │       └── src/
@@ -114,10 +114,17 @@ npm run db:push       # appliquer le schema directement
 - packages/db : schema Drizzle (users, scans, reports), types (CheckResult, ScanResult), client, re-export drizzle-orm helpers (eq, desc, etc.)
 - apps/api : Hono avec health check, middleware auth interne, middleware rate-limit
 - apps/api : routes scans (POST /api/scans, GET /api/scans/:id, GET /api/scans) avec intégration DB
-- apps/api : scan engine avec 3 checks implémentés :
+- apps/api : scan engine avec 10 checks implémentés (26 vérifications individuelles) :
   - https.ts — certificat valide, redirect HTTP→HTTPS (suit la chaîne), expiration certificat
   - headers.ts — 6 security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
   - exposed-paths.ts — 5 paths sensibles (.env, .git, /debug, /graphql, security.txt) avec validation du contenu
+  - cors.ts — wildcard Origin, credentials avec wildcard
+  - cookies.ts — flags Secure, HttpOnly, SameSite sur chaque cookie
+  - info-leakage.ts — headers Server et X-Powered-By
+  - dns.ts — records SPF et DMARC via dns.resolveTxt()
+  - tls.ts — version TLS (1.2+ requis) + force du cipher suite via tls.connect()
+  - mixed-content.ts — détection de ressources HTTP sur pages HTTPS (regex src/href/action, filtre w3.org/schema.org)
+  - open-redirects.ts — test de 7 paramètres courants (redirect, next, url, return, returnTo, redirect_uri, continue)
 - apps/web : Next.js App Router, landing page avec formulaire URL, proxy API vers Hono
 - apps/web : flow scan complet connecté au backend :
   - Landing page POST /api/scans → redirect vers /scan/[id]
@@ -160,7 +167,6 @@ npm run db:push       # appliquer le schema directement
   - Bouton "Share report" sur /scan/[id] qui copie l'URL publique dans le presse-papier
 
 ### Pas encore fait
-- 7 checks restants du scan engine (cors, cookies, info-leakage, dns, tls, mixed-content, open-redirects)
 - Page résultat scan : style élaboré, groupement par catégorie
 - Dashboard : afficher la liste des scans de l'utilisateur, résultats, historique
 - Page about
