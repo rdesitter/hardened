@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { ScoreHistoryChart } from '@/components/score-history-chart';
 
 interface CheckResult {
   id: string;
@@ -34,6 +35,11 @@ interface ScanData {
   report_token: string | null;
 }
 
+interface HistoryPoint {
+  score: number;
+  date: string;
+}
+
 function scoreColor(score: number): string {
   if (score >= 80) return 'text-green-400';
   if (score >= 50) return 'text-yellow-400';
@@ -56,6 +62,8 @@ export default function ScanPage() {
   const [scan, setScan] = useState<ScanData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<HistoryPoint[]>([]);
+  const [plan, setPlan] = useState<string | null>(null);
 
   function handleShare(token: string) {
     const url = `${window.location.origin}/report/${token}`;
@@ -92,6 +100,24 @@ export default function ScanPage() {
     poll();
     return () => { active = false; };
   }, [id]);
+
+  // Fetch plan and history once scan is loaded
+  useEffect(() => {
+    if (!scan || scan.status !== 'completed') return;
+
+    // Detect plan from fix fields: if any failed check has '__PRO_ONLY__' → free
+    const checks = scan.results?.checks ?? [];
+    const hasPro = checks.some((c) => !c.passed && c.fix === '__PRO_ONLY__');
+    const userPlan = hasPro ? 'free' : 'pro';
+    setPlan(userPlan);
+
+    if (userPlan === 'pro') {
+      fetch(`/api/scans?history=true&url=${encodeURIComponent(scan.url)}`)
+        .then((res) => res.json())
+        .then((data) => setHistory(data.history ?? []))
+        .catch(() => {});
+    }
+  }, [scan]);
 
   if (error) {
     return (
@@ -144,6 +170,27 @@ export default function ScanPage() {
         </p>
         <p className="text-gray-500">/ 100</p>
       </div>
+
+      {/* Score History Chart */}
+      {plan === 'pro' && (
+        <div className="mb-8 rounded-lg border border-gray-800 bg-gray-900 p-4">
+          <h2 className="mb-3 text-sm font-medium text-gray-300">Score History</h2>
+          <ScoreHistoryChart data={history} />
+        </div>
+      )}
+      {plan === 'free' && (
+        <div className="mb-8 rounded-lg border border-gray-700 bg-gray-800/50 p-4 text-center">
+          <p className="text-sm text-gray-400">
+            Upgrade to Pro to track your score over time
+          </p>
+          <Link
+            href="/pricing"
+            className="mt-2 inline-block rounded bg-green-900/50 px-3 py-1.5 text-xs font-medium text-green-400 hover:bg-green-900"
+          >
+            Upgrade to Pro →
+          </Link>
+        </div>
+      )}
 
       {/* Summary */}
       {results && (

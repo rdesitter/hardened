@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
 import { nanoid } from 'nanoid';
-import { db, scans, reports, eq } from '@shipsafe/db';
+import { db, scans, reports, eq, and, asc } from '@shipsafe/db';
 import type { CheckResult, ScanResult } from '@shipsafe/db';
 import { runScan } from '../engine/index.js';
 import { calculateScore } from '../engine/score.js';
@@ -89,8 +89,37 @@ scansRouter.get('/:id', async (c) => {
   });
 });
 
-// GET /api/scans — list scans
+// GET /api/scans — list scans or get history for a URL
 scansRouter.get('/', async (c) => {
+  const historyUrl = c.req.query('url');
+  const history = c.req.query('history');
+
+  // History mode: return score timeline for a specific URL
+  if (history === 'true' && historyUrl) {
+    const historyScans = await db
+      .select({
+        score: scans.score,
+        createdAt: scans.createdAt,
+      })
+      .from(scans)
+      .where(
+        and(
+          eq(scans.url, historyUrl),
+          eq(scans.status, 'completed'),
+        ),
+      )
+      .orderBy(asc(scans.createdAt))
+      .limit(50);
+
+    return c.json({
+      url: historyUrl,
+      history: historyScans.map((s) => ({
+        score: s.score,
+        date: s.createdAt,
+      })),
+    });
+  }
+
   const allScans = await db
     .select({
       id: scans.id,

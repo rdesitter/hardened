@@ -25,6 +25,7 @@ Toute la documentation technique est dans le dossier `/docs/`. Lis TOUS les fich
 - Resend — envoi d'emails (magic link + alertes monitoring)
 - Hono (Node.js) — API backend + scan engine
 - PostgreSQL 16 + Drizzle ORM — base de données
+- Recharts — graphiques d'historique des scores
 - Tailwind CSS v4 — styling
 - Monorepo avec npm workspaces
 
@@ -57,8 +58,8 @@ shipsafe/
 │       └── src/
 │           ├── app/
 │           │   ├── layout.tsx, page.tsx (landing)
-│           │   ├── scan/[id]/page.tsx (résultat scan avec polling)
-│           │   ├── dashboard/page.tsx (protégé, requiert auth)
+│           │   ├── scan/[id]/page.tsx (résultat scan avec polling + chart historique)
+│           │   ├── dashboard/ (page.tsx server + dashboard-table.tsx client avec sparklines)
 │           │   ├── auth/signin/page.tsx (formulaire email magic link)
 │           │   ├── auth/verify/page.tsx (page "vérifiez votre email")
 │           │   ├── pricing/page.tsx (page tarifs Free / Pro)
@@ -70,7 +71,7 @@ shipsafe/
 │           │   ├── api/scans/ (proxy routes vers Hono)
 │           │   ├── api/reports/[token]/route.ts (proxy public vers Hono)
 │           │   └── report/[token]/ (page.tsx SSR + report-view.tsx client)
-│           ├── components/ (scan-form.tsx, header.tsx, providers.tsx)
+│           ├── components/ (scan-form.tsx, header.tsx, providers.tsx, score-sparkline.tsx, score-history-chart.tsx)
 │           └── lib/ (api.ts, auth.ts, stripe.ts)
 ```
 
@@ -114,7 +115,7 @@ npm run db:push       # appliquer le schema directement
 - Monorepo initialisé (npm workspaces, tsconfig, .env)
 - packages/db : schema Drizzle (users, scans, reports), types (CheckResult, ScanResult), client, re-export drizzle-orm helpers (eq, and, desc, etc.)
 - apps/api : Hono avec health check, middleware auth interne, middleware rate-limit
-- apps/api : routes scans (POST /api/scans, GET /api/scans/:id, GET /api/scans) avec intégration DB
+- apps/api : routes scans (POST /api/scans, GET /api/scans/:id, GET /api/scans, GET /api/scans?url={url}&history=true) avec intégration DB
 - apps/api : scan engine avec 10 checks implémentés (26 vérifications individuelles) :
   - https.ts — certificat valide, redirect HTTP→HTTPS (suit la chaîne), expiration certificat
   - headers.ts — 6 security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
@@ -175,10 +176,19 @@ npm run db:push       # appliquer le schema directement
   - GET /api/debug/run-monitoring : endpoint temporaire pour déclencher manuellement (à supprimer avant prod)
   - Cron enregistré au démarrage de Hono dans index.ts
 - Dashboard /dashboard :
-  - Tableau des scans de l'utilisateur (URL, Score, Status, Source, Date)
+  - Tableau des scans de l'utilisateur (URL, Score, Trend, Status, Source, Date)
   - Colonne Source : "Manual" (gris) / "Monitoring" (violet) selon isMonitoring
+  - Colonne Trend : sparkline recharts pour les URLs scannées 2+ fois (Pro uniquement)
   - Lien vers /scan/[id] sur chaque URL
   - État vide avec lien vers la landing page
+- Graphiques d'historique des scores (recharts) :
+  - GET /api/scans?url={url}&history=true retourne la timeline des scores par date
+  - Proxy Next.js transmet les query params vers Hono
+  - score-sparkline.tsx : mini graphique 24x96px dans le dashboard (couleur selon dernier score)
+  - score-history-chart.tsx : graphique complet avec axes, tooltip, lignes de référence à 70/40
+  - Page /scan/[id] Pro : graphique complet de l'historique sous le score
+  - Page /scan/[id] Free : bloc "Upgrade to Pro to track your score over time"
+  - Détection du plan côté client via présence de '__PRO_ONLY__' dans les fixes
 
 ### Pas encore fait
 - Page résultat scan : style élaboré, groupement par catégorie

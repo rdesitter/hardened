@@ -1,7 +1,9 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { proxyToHono } from '@/lib/api';
+import { db, users, eq } from '@shipsafe/db';
 import Link from 'next/link';
+import { DashboardTable } from './dashboard-table';
 
 interface ScanItem {
   id: string;
@@ -23,6 +25,15 @@ async function getUserScans(): Promise<ScanItem[]> {
   }
 }
 
+async function getUserPlan(userId: string): Promise<string> {
+  const [user] = await db
+    .select({ plan: users.plan })
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+  return user?.plan ?? 'free';
+}
+
 export default async function DashboardPage() {
   const session = await auth();
 
@@ -30,10 +41,13 @@ export default async function DashboardPage() {
     redirect('/auth/signin');
   }
 
-  const scans = await getUserScans();
+  const [scans, plan] = await Promise.all([
+    getUserScans(),
+    getUserPlan(session.user.id!),
+  ]);
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-12">
+    <main className="mx-auto max-w-5xl px-4 py-12">
       <h1 className="text-2xl font-bold">Dashboard</h1>
       <p className="mt-2 text-gray-400">
         Welcome, {session.user.email}
@@ -50,82 +64,7 @@ export default async function DashboardPage() {
           </Link>
         </div>
       ) : (
-        <div className="mt-8 overflow-hidden rounded-lg border border-gray-700">
-          <table className="w-full text-left text-sm">
-            <thead className="border-b border-gray-700 bg-gray-800/50">
-              <tr>
-                <th className="px-4 py-3 font-medium text-gray-300">URL</th>
-                <th className="px-4 py-3 font-medium text-gray-300">Score</th>
-                <th className="px-4 py-3 font-medium text-gray-300">Status</th>
-                <th className="px-4 py-3 font-medium text-gray-300">Source</th>
-                <th className="px-4 py-3 font-medium text-gray-300">Date</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-700/50">
-              {scans.map((scan) => (
-                <tr key={scan.id} className="hover:bg-gray-800/30">
-                  <td className="px-4 py-3">
-                    <Link
-                      href={`/scan/${scan.id}`}
-                      className="text-blue-400 hover:underline"
-                    >
-                      {scan.url.replace(/^https?:\/\//, '').slice(0, 40)}
-                    </Link>
-                  </td>
-                  <td className="px-4 py-3">
-                    {scan.score !== null ? (
-                      <span
-                        className={
-                          scan.score >= 70
-                            ? 'text-green-400'
-                            : scan.score >= 40
-                              ? 'text-yellow-400'
-                              : 'text-red-400'
-                        }
-                      >
-                        {scan.score}/100
-                      </span>
-                    ) : (
-                      <span className="text-gray-500">—</span>
-                    )}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${
-                        scan.status === 'completed'
-                          ? 'bg-green-900/50 text-green-400'
-                          : scan.status === 'failed'
-                            ? 'bg-red-900/50 text-red-400'
-                            : 'bg-yellow-900/50 text-yellow-400'
-                      }`}
-                    >
-                      {scan.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${
-                        scan.isMonitoring
-                          ? 'bg-purple-900/50 text-purple-400'
-                          : 'bg-gray-700/50 text-gray-400'
-                      }`}
-                    >
-                      {scan.isMonitoring ? 'Monitoring' : 'Manual'}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-gray-400">
-                    {new Date(scan.createdAt).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DashboardTable scans={scans} plan={plan} />
       )}
     </main>
   );

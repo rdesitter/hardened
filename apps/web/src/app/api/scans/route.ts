@@ -15,9 +15,12 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const res = await proxyToHono('/api/scans');
+    const { searchParams } = new URL(request.url);
+    const qs = searchParams.toString();
+    const path = qs ? `/api/scans?${qs}` : '/api/scans';
+    const res = await proxyToHono(path);
     const data = await res.json();
     return NextResponse.json(data, { status: res.status });
   } catch {
