@@ -1,20 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export function ScanForm() {
+  const router = useRouter();
   const [url, setUrl] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>(
-    'idle',
-  );
-  const [result, setResult] = useState<string | null>(null);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!url) return;
 
     setStatus('loading');
-    setResult(null);
+    setError(null);
 
     try {
       const res = await fetch('/api/scans', {
@@ -26,15 +26,14 @@ export function ScanForm() {
 
       if (!res.ok) {
         setStatus('error');
-        setResult(data.error ?? 'Something went wrong');
+        setError(data.error ?? 'Something went wrong');
         return;
       }
 
-      setStatus('done');
-      setResult(`Scan created: ${data.id} (status: ${data.status})`);
+      router.push(`/scan/${data.id}`);
     } catch {
       setStatus('error');
-      setResult('Failed to reach the API');
+      setError('Failed to reach the API');
     }
   }
 
@@ -57,13 +56,7 @@ export function ScanForm() {
           {status === 'loading' ? 'Scanning...' : 'Scan'}
         </button>
       </div>
-      {result && (
-        <p
-          className={`text-sm ${status === 'error' ? 'text-red-400' : 'text-green-400'}`}
-        >
-          {result}
-        </p>
-      )}
+      {error && <p className="text-sm text-red-400">{error}</p>}
     </form>
   );
 }

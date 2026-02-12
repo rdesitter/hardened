@@ -51,7 +51,10 @@ shipsafe/
 │   └── web/                  # Next.js — port 3000
 │       ├── Dockerfile
 │       └── src/
-│           ├── app/ (layout.tsx, page.tsx, api/scans/*)
+│           ├── app/
+│           │   ├── layout.tsx, page.tsx (landing)
+│           │   ├── scan/[id]/page.tsx (résultat scan avec polling)
+│           │   └── api/scans/ (proxy routes vers Hono)
 │           ├── components/ (scan-form.tsx)
 │           └── lib/ (api.ts — proxy vers Hono)
 ```
@@ -99,6 +102,11 @@ npm run db:push       # appliquer le schema directement
   - headers.ts — 6 security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
   - exposed-paths.ts — 5 paths sensibles (.env, .git, /debug, /graphql, security.txt) avec validation du contenu
 - apps/web : Next.js App Router, landing page avec formulaire URL, proxy API vers Hono
+- apps/web : flow scan complet connecté au backend :
+  - Landing page POST /api/scans → redirect vers /scan/[id]
+  - Page /scan/[id] poll GET /api/scans/:id toutes les 2s
+  - Loader animé pendant pending/running
+  - Affichage score + liste checks pass/fail avec badges category
 - Docker : docker-compose.yml + Dockerfiles, tout fonctionne avec `docker compose up`
 - Schema Drizzle poussé en DB via `drizzle-kit push`
 
@@ -106,6 +114,7 @@ npm run db:push       # appliquer le schema directement
 - 7 checks restants du scan engine (cors, cookies, info-leakage, dns, tls, mixed-content, open-redirects)
 - Auth.js (magic link)
 - Stripe (checkout, webhooks, customer portal)
+- Page résultat scan : style élaboré, groupement par catégorie, affichage fixes
 - Dashboard (liste des scans, résultats, historique)
 - Pages marketing (pricing, about)
 - Rapport public partageable
