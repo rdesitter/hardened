@@ -38,7 +38,7 @@ export function ScanForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <div className="flex gap-2">
         <input
           type="url"
@@ -46,17 +46,24 @@ export function ScanForm() {
           onChange={(e) => setUrl(e.target.value)}
           placeholder="https://your-app.com"
           required
-          className="flex-1 rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white placeholder-gray-500 focus:border-green-400 focus:outline-none focus:ring-1 focus:ring-green-400"
+          className="flex-1 rounded-xl border border-gray-700 bg-gray-900 px-4 py-3.5 text-white placeholder-gray-500 transition-colors focus:border-green-400 focus:outline-none focus:ring-1 focus:ring-green-400"
         />
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="rounded-lg bg-green-500 px-6 py-3 font-semibold text-gray-950 transition-colors hover:bg-green-400 disabled:opacity-50"
+          className="rounded-xl bg-green-500 px-8 py-3.5 font-semibold text-gray-950 transition-all hover:bg-green-400 disabled:opacity-50"
         >
-          {status === 'loading' ? 'Scanning...' : 'Scan'}
+          {status === 'loading' ? (
+            <span className="flex items-center gap-2">
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-gray-950 border-t-transparent" />
+              Scanning...
+            </span>
+          ) : (
+            'Scan now'
+          )}
         </button>
       </div>
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-center text-sm text-red-400">{error}</p>}
     </form>
   );
 }

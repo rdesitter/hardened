@@ -57,9 +57,9 @@ shipsafe/
 │       ├── Dockerfile
 │       └── src/
 │           ├── app/
-│           │   ├── layout.tsx, page.tsx (landing)
-│           │   ├── scan/[id]/page.tsx (résultat scan avec polling + chart historique)
-│           │   ├── dashboard/ (page.tsx server + dashboard-table.tsx client avec sparklines)
+│           │   ├── layout.tsx, page.tsx (landing: hero + benefits + sample report + footer)
+│           │   ├── scan/[id]/page.tsx (score circle SVG + checks groupés expandables + chart)
+│           │   ├── dashboard/ (page.tsx server + dashboard-scans.tsx client cards + sparklines)
 │           │   ├── auth/signin/page.tsx (formulaire email magic link)
 │           │   ├── auth/verify/page.tsx (page "vérifiez votre email")
 │           │   ├── pricing/page.tsx (page tarifs Free / Pro)
@@ -127,12 +127,19 @@ npm run db:push       # appliquer le schema directement
   - tls.ts — version TLS (1.2+ requis) + force du cipher suite via tls.connect()
   - mixed-content.ts — détection de ressources HTTP sur pages HTTPS (regex src/href/action, filtre w3.org/schema.org)
   - open-redirects.ts — test de 7 paramètres courants (redirect, next, url, return, returnTo, redirect_uri, continue)
-- apps/web : Next.js App Router, landing page avec formulaire URL, proxy API vers Hono
-- apps/web : flow scan complet connecté au backend :
-  - Landing page POST /api/scans → redirect vers /scan/[id]
-  - Page /scan/[id] poll GET /api/scans/:id toutes les 2s
-  - Loader animé pendant pending/running
-  - Affichage score + liste checks pass/fail avec badges category
+- apps/web : Next.js App Router, proxy API vers Hono
+- Landing page :
+  - Hero : "Is your AI-built app secure?" + sous-titre + pill badge "Free security audit"
+  - Formulaire URL centré avec bouton "Scan now" + spinner loading
+  - Section 3 bénéfices (Security Score, Detailed Fixes, Weekly Monitoring) avec icônes SVG
+  - Section sample report : score circle SVG (62/100) + 8 checks exemple
+  - Footer minimal
+- Page /scan/[id] :
+  - Score dans un cercle SVG coloré (vert ≥70, orange ≥40, rouge <40) avec stroke animé
+  - URL + résumé (passed/failed/ms) + bouton Share avec icône
+  - Checks groupés par catégorie (Transport, Headers, CORS, Cookies, Exposure, DNS) avec compteur pass/total
+  - Chaque check : expandable (chevron), détail, fix en bloc code (Pro) ou CTA upgrade (Free)
+  - Poll GET /api/scans/:id toutes les 2s, loader shield animé pendant pending/running
 - Docker : docker-compose.yml + Dockerfiles, tout fonctionne avec `docker compose up`
 - Schema Drizzle poussé en DB via `drizzle-kit push`
 - Auth.js v5 configuré avec :
@@ -176,11 +183,10 @@ npm run db:push       # appliquer le schema directement
   - GET /api/debug/run-monitoring : endpoint temporaire pour déclencher manuellement (à supprimer avant prod)
   - Cron enregistré au démarrage de Hono dans index.ts
 - Dashboard /dashboard :
-  - Tableau des scans de l'utilisateur (URL, Score, Trend, Status, Source, Date)
-  - Colonne Source : "Manual" (gris) / "Monitoring" (violet) selon isMonitoring
-  - Colonne Trend : sparkline recharts pour les URLs scannées 2+ fois (Pro uniquement)
-  - Lien vers /scan/[id] sur chaque URL
-  - État vide avec lien vers la landing page
+  - Bouton "New scan" en haut à droite
+  - Grille de cards (2 colonnes) : mini score circle SVG, URL, badges status/source, date, sparkline
+  - Sparkline recharts pour les URLs scannées 2+ fois (Pro uniquement)
+  - État vide avec icône shield + "Run your first scan" CTA
 - Graphiques d'historique des scores (recharts) :
   - GET /api/scans?url={url}&history=true retourne la timeline des scores par date
   - Proxy Next.js transmet les query params vers Hono
@@ -191,5 +197,4 @@ npm run db:push       # appliquer le schema directement
   - Détection du plan côté client via présence de '__PRO_ONLY__' dans les fixes
 
 ### Pas encore fait
-- Page résultat scan : style élaboré, groupement par catégorie
 - Page about
