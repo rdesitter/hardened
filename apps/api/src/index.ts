@@ -3,6 +3,7 @@ import { Hono } from 'hono';
 import { logger } from 'hono/logger';
 import { internalAuth } from './middleware/auth.js';
 import { scansRouter } from './routes/scans.js';
+import { reportsRouter } from './routes/reports.js';
 
 const app = new Hono();
 
@@ -13,7 +14,10 @@ app.get('/health', (c) => {
   return c.json({ status: 'ok', service: 'shipsafe-api' });
 });
 
-// All /api/* routes require internal auth
+// Public routes — no auth required
+app.route('/api/reports', reportsRouter);
+
+// All other /api/* routes require internal auth
 app.use('/api/*', internalAuth);
 
 // Routes

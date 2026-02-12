@@ -21,6 +21,7 @@ Toute la documentation technique est dans le dossier `/docs/`. Lis TOUS les fich
 
 - Next.js 15 (App Router) — front + auth + Stripe webhooks
 - Auth.js v5 (next-auth 5.0.0-beta.30) — authentification magic link
+- Stripe — paiement, abonnements, customer portal
 - Resend — envoi d'emails (magic link)
 - Hono (Node.js) — API backend + scan engine
 - PostgreSQL 16 + Drizzle ORM — base de données
@@ -44,7 +45,7 @@ shipsafe/
 │   │   └── src/
 │   │       ├── index.ts
 │   │       ├── middleware/ (auth.ts, rate-limit.ts)
-│   │       ├── routes/ (scans.ts)
+│   │       ├── routes/ (scans.ts, reports.ts)
 │   │       └── engine/
 │   │           ├── index.ts (runScan orchestrateur)
 │   │           ├── score.ts (calculateScore, calculateSummary)
@@ -59,10 +60,17 @@ shipsafe/
 │           │   ├── dashboard/page.tsx (protégé, requiert auth)
 │           │   ├── auth/signin/page.tsx (formulaire email magic link)
 │           │   ├── auth/verify/page.tsx (page "vérifiez votre email")
+│           │   ├── pricing/page.tsx (page tarifs Free / Pro)
+│           │   ├── settings/page.tsx + portal-button.tsx (compte + billing)
 │           │   ├── api/auth/[...nextauth]/route.ts (Auth.js handlers)
-│           │   └── api/scans/ (proxy routes vers Hono)
+│           │   ├── api/checkout/route.ts (crée Stripe Checkout session)
+│           │   ├── api/portal/route.ts (crée Stripe Customer Portal session)
+│           │   ├── api/webhooks/stripe/route.ts (webhook Stripe signé)
+│           │   ├── api/scans/ (proxy routes vers Hono)
+│           │   ├── api/reports/[token]/route.ts (proxy public vers Hono)
+│           │   └── report/[token]/ (page.tsx SSR + report-view.tsx client)
 │           ├── components/ (scan-form.tsx, header.tsx, providers.tsx)
-│           └── lib/ (api.ts — proxy vers Hono, auth.ts — config Auth.js)
+│           └── lib/ (api.ts, auth.ts, stripe.ts)
 ```
 
 ## Commandes
@@ -97,6 +105,7 @@ npm run db:push       # appliquer le schema directement
 - Les appels du front vers Hono passent par des Route Handlers Next.js (proxy avec X-Internal-Token)
 - Le proxy enrichit les headers avec X-User-Id et X-User-Plan quand l'utilisateur est authentifié
 - Le scan fonctionne SANS être connecté — l'auth est optionnelle
+- Les routes /api/reports/* dans Hono sont publiques (pas de X-Internal-Token requis)
 
 ## État actuel
 
@@ -123,17 +132,37 @@ npm run db:push       # appliquer le schema directement
   - Session strategy: database
   - Callback session injectant user.id
   - Pages custom: /auth/signin, /auth/verify
-- Header avec Sign in / Dashboard / Sign out selon l'état de session (useSession)
+- Header avec Pricing / Dashboard / Settings / Sign in / Sign out selon l'état de session
 - SessionProvider via composant Providers wrappant le layout
 - Dashboard /dashboard protégé (redirect vers /auth/signin si non connecté)
 - Proxy api.ts enrichi : X-User-Id + X-User-Plan (lookup DB) quand authentifié
+- Stripe intégré :
+  - lib/stripe.ts avec init lazy (getStripe()) pour éviter crash au build
+  - Page /pricing avec plans Free / Pro ($9/mois)
+  - POST /api/checkout → crée Stripe Checkout session (mode subscription)
+  - Page /settings avec plan actuel + bouton "Manage billing" → Stripe Customer Portal
+  - POST /api/portal → crée Stripe Portal session
+  - Webhook /api/webhooks/stripe avec vérification signature :
+    - checkout.session.completed → user.plan = 'pro' + sauvegarde stripeCustomerId/subscriptionId
+    - customer.subscription.deleted → user.plan = 'free'
+    - invoice.payment_failed → log
+- Masquage des fixes côté Hono :
+  - sanitizeForFreePlan() dans routes/scans.ts
+  - GET /api/scans/:id lit X-User-Plan : free → fix remplacé par '__PRO_ONLY__', pro → fix complet
+  - POST /api/scans transmet X-User-Id comme userId en DB
+- Page scan/[id] : affiche "Upgrade to Pro to see the fix →" (lien /pricing) quand fix === '__PRO_ONLY__', affiche le fix en <pre> quand disponible
+- Rapports publics :
+  - À la fin d'un scan (status completed), un report est créé automatiquement avec un publicToken (nanoid 32 chars)
+  - GET /api/scans/:id retourne report_token dans la réponse
+  - GET /api/reports/:token (Hono, public, sans auth) retourne le scan complet AVEC fixes (vitrine)
+  - Page /report/[token] : SSR avec generateMetadata() pour les OG tags (titre, description, Twitter card)
+  - report-view.tsx : composant client affichant score + checks + fixes complets
+  - Bouton "Share report" sur /scan/[id] qui copie l'URL publique dans le presse-papier
 
 ### Pas encore fait
 - 7 checks restants du scan engine (cors, cookies, info-leakage, dns, tls, mixed-content, open-redirects)
-- Stripe (checkout, webhooks, customer portal)
-- Page résultat scan : style élaboré, groupement par catégorie, affichage fixes
+- Page résultat scan : style élaboré, groupement par catégorie
 - Dashboard : afficher la liste des scans de l'utilisateur, résultats, historique
-- Pages marketing (pricing, about)
-- Rapport public partageable
+- Page about
 - Cron monitoring hebdomadaire
 - Alertes email via Resend

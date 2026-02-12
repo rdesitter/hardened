@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 interface CheckResult {
   id: string;
@@ -30,6 +31,7 @@ interface ScanData {
     scan_duration_ms: number;
   } | null;
   error: string | null;
+  report_token: string | null;
 }
 
 function scoreColor(score: number): string {
@@ -53,6 +55,15 @@ export default function ScanPage() {
   const { id } = useParams<{ id: string }>();
   const [scan, setScan] = useState<ScanData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  function handleShare(token: string) {
+    const url = `${window.location.origin}/report/${token}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
 
   useEffect(() => {
     if (!id) return;
@@ -136,10 +147,22 @@ export default function ScanPage() {
 
       {/* Summary */}
       {results && (
-        <div className="mb-8 flex justify-center gap-6 text-sm">
+        <div className="mb-4 flex justify-center gap-6 text-sm">
           <span className="text-green-400">{results.summary.passed} passed</span>
           <span className="text-red-400">{results.summary.failed} failed</span>
           <span className="text-gray-500">{results.scan_duration_ms}ms</span>
+        </div>
+      )}
+
+      {/* Share button */}
+      {scan.report_token && (
+        <div className="mb-8 text-center">
+          <button
+            onClick={() => handleShare(scan.report_token!)}
+            className="rounded-lg bg-gray-800 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700"
+          >
+            {copied ? 'Link copied!' : 'Share report'}
+          </button>
         </div>
       )}
 
@@ -163,6 +186,19 @@ export default function ScanPage() {
                 </span>
               </div>
               <p className="mt-1 text-sm text-gray-400">{check.detail}</p>
+              {!check.passed && check.fix === '__PRO_ONLY__' && (
+                <Link
+                  href="/pricing"
+                  className="mt-2 inline-block rounded bg-green-900/50 px-3 py-1.5 text-xs font-medium text-green-400 hover:bg-green-900"
+                >
+                  Upgrade to Pro to see the fix →
+                </Link>
+              )}
+              {!check.passed && check.fix && check.fix !== '__PRO_ONLY__' && (
+                <pre className="mt-2 rounded bg-gray-800 p-3 text-xs text-gray-300">
+                  {check.fix}
+                </pre>
+              )}
             </div>
           ))}
         </div>

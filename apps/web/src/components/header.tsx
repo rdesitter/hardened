@@ -12,6 +12,12 @@ export function Header() {
         Ship<span className="text-green-400">Safe</span>
       </Link>
       <nav className="flex items-center gap-4">
+        <Link
+          href="/pricing"
+          className="text-sm text-gray-400 hover:text-white"
+        >
+          Pricing
+        </Link>
         {status === 'authenticated' ? (
           <>
             <Link
@@ -19,6 +25,12 @@ export function Header() {
               className="text-sm text-gray-400 hover:text-white"
             >
               Dashboard
+            </Link>
+            <Link
+              href="/settings"
+              className="text-sm text-gray-400 hover:text-white"
+            >
+              Settings
             </Link>
             <span className="text-sm text-gray-500">{session.user?.email}</span>
             <button
