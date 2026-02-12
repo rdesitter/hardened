@@ -2,6 +2,7 @@ import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { logger } from 'hono/logger';
 import { internalAuth } from './middleware/auth.js';
+import { scansRouter } from './routes/scans.js';
 
 const app = new Hono();
 
@@ -15,21 +16,8 @@ app.get('/health', (c) => {
 // All /api/* routes require internal auth
 app.use('/api/*', internalAuth);
 
-// Placeholder routes — will be replaced by real scan logic later
-app.post('/api/scans', (c) => {
-  return c.json(
-    { id: crypto.randomUUID(), status: 'pending', message: 'Scan engine not implemented yet' },
-    201,
-  );
-});
-
-app.get('/api/scans/:id', (c) => {
-  return c.json({ id: c.req.param('id'), status: 'pending' });
-});
-
-app.get('/api/scans', (c) => {
-  return c.json({ scans: [], total: 0 });
-});
+// Routes
+app.route('/api/scans', scansRouter);
 
 const port = Number(process.env.PORT) || 4000;
 

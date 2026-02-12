@@ -39,7 +39,15 @@ shipsafe/
 ├── apps/
 │   ├── api/                  # Hono — port 4000
 │   │   ├── Dockerfile
-│   │   └── src/ (index.ts, middleware/auth.ts, middleware/rate-limit.ts)
+│   │   └── src/
+│   │       ├── index.ts
+│   │       ├── middleware/ (auth.ts, rate-limit.ts)
+│   │       ├── routes/ (scans.ts)
+│   │       └── engine/
+│   │           ├── index.ts (runScan orchestrateur)
+│   │           ├── score.ts (calculateScore, calculateSummary)
+│   │           ├── utils.ts (safeFetch, safeCheck)
+│   │           └── checks/ (https.ts, headers.ts, exposed-paths.ts)
 │   └── web/                  # Next.js — port 3000
 │       ├── Dockerfile
 │       └── src/
@@ -83,13 +91,19 @@ npm run db:push       # appliquer le schema directement
 
 ### Fait
 - Monorepo initialisé (npm workspaces, tsconfig, .env)
-- packages/db : schema Drizzle (users, scans, reports), types (CheckResult, ScanResult), client
-- apps/api : Hono avec health check, middleware auth interne, middleware rate-limit, routes placeholder (POST/GET /api/scans)
+- packages/db : schema Drizzle (users, scans, reports), types (CheckResult, ScanResult), client, re-export drizzle-orm helpers (eq, desc, etc.)
+- apps/api : Hono avec health check, middleware auth interne, middleware rate-limit
+- apps/api : routes scans (POST /api/scans, GET /api/scans/:id, GET /api/scans) avec intégration DB
+- apps/api : scan engine avec 3 checks implémentés :
+  - https.ts — certificat valide, redirect HTTP→HTTPS (suit la chaîne), expiration certificat
+  - headers.ts — 6 security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+  - exposed-paths.ts — 5 paths sensibles (.env, .git, /debug, /graphql, security.txt) avec validation du contenu
 - apps/web : Next.js App Router, landing page avec formulaire URL, proxy API vers Hono
-- Docker : docker-compose.yml + Dockerfiles pour web et api, tout fonctionne avec `docker compose up`
+- Docker : docker-compose.yml + Dockerfiles, tout fonctionne avec `docker compose up`
+- Schema Drizzle poussé en DB via `drizzle-kit push`
 
 ### Pas encore fait
-- Scan engine (checks de sécurité)
+- 7 checks restants du scan engine (cors, cookies, info-leakage, dns, tls, mixed-content, open-redirects)
 - Auth.js (magic link)
 - Stripe (checkout, webhooks, customer portal)
 - Dashboard (liste des scans, résultats, historique)
@@ -97,4 +111,3 @@ npm run db:push       # appliquer le schema directement
 - Rapport public partageable
 - Cron monitoring hebdomadaire
 - Alertes email via Resend
-- Migrations Drizzle (schema pas encore poussé en DB)
