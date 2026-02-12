@@ -25,10 +25,10 @@ export async function generateMetadata({
   const report = await fetchReport(token);
 
   if (!report) {
-    return { title: 'Report not found — ShipSafe' };
+    return { title: 'Report not found — Hardened' };
   }
 
-  const title = `ShipSafe Score: ${report.score}/100`;
+  const title = `Hardened Score: ${report.score}/100`;
   const description = `Security audit for ${report.url} — ${report.results.summary.passed} passed, ${report.results.summary.failed} failed (${report.results.summary.critical_failed} critical)`;
 
   return {
@@ -38,7 +38,7 @@ export async function generateMetadata({
       title,
       description,
       url: `${APP_URL}/report/${token}`,
-      siteName: 'ShipSafe',
+      siteName: 'Hardened',
       type: 'website',
     },
     twitter: {

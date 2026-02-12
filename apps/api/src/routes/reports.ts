@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { db, reports, scans, eq } from '@shipsafe/db';
+import { db, reports, scans, eq } from '@hardened/db';
 
 export const reportsRouter = new Hono();
 

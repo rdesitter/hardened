@@ -1,18 +1,18 @@
-# Terms of Service — ShipSafe
+# Terms of Service — Hardened
 
-*Last updated: [DATE]*
+*Last updated: 2025-02-12*
 
-## 1. About ShipSafe
+## 1. About Hardened
 
-ShipSafe is an automated security audit tool for web applications, operated by [PRÉNOM NOM], self-employed worker (travailleur autonome) based in Montréal, Québec, Canada.
+Hardened is an automated security audit tool for web applications, operated by R&D Solutions Numériques, sole proprietorship registered in Québec, Canada.
 
-These Terms of Service ("Terms") govern your use of ShipSafe (the "Service") available at [URL].
+These Terms of Service ("Terms") govern your use of Hardened (the "Service") available at https://hardened.app.
 
-By using ShipSafe, you agree to these Terms. If you do not agree, please do not use the Service.
+By using Hardened, you agree to these Terms. If you do not agree, please do not use the Service.
 
 ## 2. Description of the Service
 
-ShipSafe analyzes publicly accessible aspects of web applications to identify potential security issues. Our scans include:
+Hardened analyzes publicly accessible aspects of web applications to identify potential security issues. Our scans include:
 - HTTP/HTTPS configuration checks
 - Security header analysis
 - CORS configuration verification
@@ -21,7 +21,7 @@ ShipSafe analyzes publicly accessible aspects of web applications to identify po
 - DNS security record verification
 - TLS/SSL configuration analysis
 
-**Important:** ShipSafe only performs checks that are publicly accessible — equivalent to what any web browser or HTTP client can observe. ShipSafe does **not**:
+**Important:** Hardened only performs checks that are publicly accessible — equivalent to what any web browser or HTTP client can observe. Hardened does **not**:
 - Access private data or databases
 - Attempt to bypass authentication
 - Perform penetration testing or exploit vulnerabilities
@@ -30,13 +30,13 @@ ShipSafe analyzes publicly accessible aspects of web applications to identify po
 ## 3. Accounts
 
 ### 3.1 Account creation
-You may use ShipSafe's free scan without creating an account. To access the dashboard, scan history, and paid features, you must create an account with a valid email address.
+You may use Hardened's free scan without creating an account. To access the dashboard, scan history, and paid features, you must create an account with a valid email address.
 
 ### 3.2 Account security
-You are responsible for maintaining the security of your account. Notify us immediately at support@shipsafe.app if you suspect unauthorized access.
+You are responsible for maintaining the security of your account. Notify us immediately at support@hardened.app if you suspect unauthorized access.
 
 ### 3.3 Age requirement
-You must be at least 16 years old to use ShipSafe.
+You must be at least 16 years old to use Hardened.
 
 ## 4. Plans and pricing
 
@@ -67,17 +67,17 @@ Pro subscriptions are billed monthly. Your subscription renews automatically unl
 You can cancel your subscription at any time from your account settings or via the Stripe Customer Portal. Cancellation takes effect at the end of your current billing period. You will retain Pro access until then.
 
 ### 5.4 Refunds
-We offer a full refund within 14 days of your first Pro subscription if you are not satisfied. After this period, no refunds are provided for partial billing periods. To request a refund, contact support@shipsafe.app.
+We offer a full refund within 14 days of your first Pro subscription if you are not satisfied. After this period, no refunds are provided for partial billing periods. To request a refund, contact support@hardened.app.
 
 ## 6. Acceptable use
 
-You agree to use ShipSafe only to:
+You agree to use Hardened only to:
 - Scan web applications you own or have authorization to test
 - Improve the security of your own applications
 
 You agree **not** to:
 - Scan applications without authorization from their owner
-- Use ShipSafe to identify vulnerabilities for malicious purposes
+- Use Hardened to identify vulnerabilities for malicious purposes
 - Attempt to overwhelm or disrupt scanned applications through excessive scanning
 - Circumvent rate limits or abuse the Service
 - Use the Service for any illegal purpose
@@ -87,7 +87,7 @@ You agree **not** to:
 ## 7. Intellectual property
 
 ### 7.1 Our content
-ShipSafe, including its code, design, documentation, and security check methodologies, is our intellectual property. Scan reports are generated for your use and may be shared freely.
+Hardened, including its code, design, documentation, and security check methodologies, is our intellectual property. Scan reports are generated for your use and may be shared freely.
 
 ### 7.2 Your content
 You retain ownership of the URLs you submit and any data associated with your account.
@@ -95,16 +95,16 @@ You retain ownership of the URLs you submit and any data associated with your ac
 ## 8. Disclaimer and limitation of liability
 
 ### 8.1 Service provided "as is"
-ShipSafe is provided "as is" without warranty of any kind, express or implied. We do not guarantee that:
+Hardened is provided "as is" without warranty of any kind, express or implied. We do not guarantee that:
 - Scans will detect all security issues
 - Fix recommendations will resolve all vulnerabilities
 - The Service will be uninterrupted or error-free
 
 ### 8.2 Not a substitute for professional security audit
-ShipSafe is an automated tool that checks common security configurations. It is **not** a comprehensive security audit, penetration test, or compliance assessment. For critical applications, we recommend engaging a professional security firm.
+Hardened is an automated tool that checks common security configurations. It is **not** a comprehensive security audit, penetration test, or compliance assessment. For critical applications, we recommend engaging a professional security firm.
 
 ### 8.3 Limitation of liability
-To the maximum extent permitted by law, [PRÉNOM NOM] shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, including but not limited to:
+To the maximum extent permitted by law, R&D Solutions Numériques shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, including but not limited to:
 - Security incidents on your applications
 - Loss of data or profits
 - Reliance on scan results or fix recommendations
@@ -142,6 +142,6 @@ If any provision of these Terms is found to be unenforceable, the remaining prov
 
 For any questions about these Terms:
 
-[PRÉNOM NOM]
-Email: support@shipsafe.app
+R&D Solutions Numériques
+Email: support@hardened.app
 Location: Montréal, Québec, Canada

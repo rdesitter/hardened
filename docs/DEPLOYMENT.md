@@ -7,7 +7,7 @@ Tout tourne sur un VPS unique avec Dokploy.
 ```
 VPS (Dokploy)
 ├── Reverse proxy (Traefik/Nginx — géré par Dokploy)
-│   └── shipsafe.app → container web (port 3000)
+│   └── hardened.app → container web (port 3000)
 │
 ├── Container: web (Next.js)
 │   ├── Port 3000
@@ -96,13 +96,13 @@ CMD ["node", "dist/index.js"]
 
 ### Étapes de setup
 
-1. **Créer un projet** "ShipSafe" dans Dokploy
+1. **Créer un projet** "Hardened" dans Dokploy
 2. **Ajouter 3 services :**
    - `web` — type Docker, source GitHub, Dockerfile `apps/web/Dockerfile`
    - `api` — type Docker, source GitHub, Dockerfile `apps/api/Dockerfile`
    - `postgres` — type Database PostgreSQL
 3. **Réseau :** les 3 services doivent être dans le même réseau Docker interne Dokploy
-4. **Domaine :** configurer `shipsafe.app` (ou domaine choisi) pointant vers le service `web`
+4. **Domaine :** configurer `hardened.app` (ou domaine choisi) pointant vers le service `web`
 5. **SSL :** Let's Encrypt via Dokploy (automatique)
 6. **Variables d'environnement :** configurer dans Dokploy pour chaque service
 
@@ -110,29 +110,29 @@ CMD ["node", "dist/index.js"]
 
 **web :**
 ```
-DATABASE_URL=postgresql://shipsafe:xxx@postgres:5432/shipsafe
+DATABASE_URL=postgresql://hardened:xxx@postgres:5432/hardened
 AUTH_SECRET=xxx
-AUTH_URL=https://shipsafe.app
+AUTH_URL=https://hardened.app
 RESEND_API_KEY=re_xxx
 STRIPE_SECRET_KEY=sk_xxx
 STRIPE_WEBHOOK_SECRET=whsec_xxx
 STRIPE_PRO_PRICE_ID=price_xxx
 INTERNAL_API_TOKEN=xxx
 HONO_API_URL=http://api:4000
-NEXT_PUBLIC_APP_URL=https://shipsafe.app
+NEXT_PUBLIC_APP_URL=https://hardened.app
 ```
 
 **api :**
 ```
-DATABASE_URL=postgresql://shipsafe:xxx@postgres:5432/shipsafe
+DATABASE_URL=postgresql://hardened:xxx@postgres:5432/hardened
 INTERNAL_API_TOKEN=xxx
 RESEND_API_KEY=re_xxx
 ```
 
 **postgres :**
 ```
-POSTGRES_DB=shipsafe
-POSTGRES_USER=shipsafe
+POSTGRES_DB=hardened
+POSTGRES_USER=hardened
 POSTGRES_PASSWORD=xxx
 ```
 
@@ -168,4 +168,4 @@ PostgreSQL backup à configurer dans Dokploy :
 Pour le MVP, monitoring basique :
 - Dokploy health checks sur les containers
 - Logs accessibles via Dokploy UI
-- Pas de monitoring externe au lancement (ironie : ShipSafe pourrait se monitorer lui-même plus tard)
+- Pas de monitoring externe au lancement (ironie : Hardened pourrait se monitorer lui-même plus tard)

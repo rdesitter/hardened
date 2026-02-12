@@ -23,8 +23,8 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: shipsafe
-      POSTGRES_USER: shipsafe
+      POSTGRES_DB: hardened
+      POSTGRES_USER: hardened
       POSTGRES_PASSWORD: password
     volumes:
       - pgdata:/var/lib/postgresql/data

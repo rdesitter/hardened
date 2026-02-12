@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import Resend from 'next-auth/providers/resend';
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
-import { db, users, accounts, sessions, verificationTokens } from '@shipsafe/db';
+import { db, users, accounts, sessions, verificationTokens } from '@hardened/db';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(db, {
@@ -13,7 +13,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Resend({
       apiKey: process.env.RESEND_API_KEY,
-      from: process.env.AUTH_EMAIL_FROM ?? 'ShipSafe <noreply@shipsafe.app>',
+      from: process.env.AUTH_EMAIL_FROM ?? 'Hardened <noreply@hardened.app>',
     }),
   ],
   session: {

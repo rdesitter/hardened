@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-Le scan engine est le cœur de ShipSafe. Il reçoit une URL, exécute une série de checks de sécurité, calcule un score, et retourne un rapport structuré.
+Le scan engine est le cœur de Hardened. Il reçoit une URL, exécute une série de checks de sécurité, calcule un score, et retourne un rapport structuré.
 
 Tous les checks sont exécutés en parallèle (Promise.all) pour minimiser le temps total du scan (objectif : < 15 secondes).
 

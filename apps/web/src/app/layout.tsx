@@ -4,7 +4,7 @@ import { Header } from '@/components/header';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'ShipSafe — Security Audit for AI-Generated Apps',
+  title: 'Hardened — Security Audit for AI-Generated Apps',
   description:
     'Automated security scanning for web apps built with AI. Get your security score in seconds.',
 };

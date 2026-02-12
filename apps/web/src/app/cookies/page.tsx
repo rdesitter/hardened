@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy — ShipSafe',
-  description: 'How ShipSafe uses cookies and how to manage them.',
+  title: 'Cookie Policy — Hardened',
+  description: 'How Hardened uses cookies and how to manage them.',
 };
 
 const PROSE = [
@@ -36,7 +36,7 @@ export default function CookiesPage() {
 
         <h2>Cookies we use</h2>
         <p>
-          ShipSafe uses only <strong>strictly necessary cookies</strong>. These cookies are essential for the Service to function and cannot be disabled.
+          Hardened uses only <strong>strictly necessary cookies</strong>. These cookies are essential for the Service to function and cannot be disabled.
         </p>
         <table>
           <thead>
@@ -47,19 +47,19 @@ export default function CookiesPage() {
               <td><code>authjs.session-token</code></td>
               <td>Keeps you logged in to your account</td>
               <td>30 days</td>
-              <td>ShipSafe (Auth.js)</td>
+              <td>Hardened (Auth.js)</td>
             </tr>
             <tr>
               <td><code>authjs.csrf-token</code></td>
               <td>Protects against cross-site request forgery</td>
               <td>Session</td>
-              <td>ShipSafe (Auth.js)</td>
+              <td>Hardened (Auth.js)</td>
             </tr>
             <tr>
               <td><code>authjs.callback-url</code></td>
               <td>Redirects you after login</td>
               <td>Session</td>
-              <td>ShipSafe (Auth.js)</td>
+              <td>Hardened (Auth.js)</td>
             </tr>
             <tr>
               <td><code>__stripe_mid</code></td>
@@ -77,7 +77,7 @@ export default function CookiesPage() {
         </table>
 
         <h2>Cookies we do NOT use</h2>
-        <p>ShipSafe does <strong>not</strong> use:</p>
+        <p>Hardened does <strong>not</strong> use:</p>
         <ul>
           <li>Analytics cookies (Google Analytics, Mixpanel, etc.)</li>
           <li>Advertising or tracking cookies</li>
@@ -87,7 +87,7 @@ export default function CookiesPage() {
 
         <h2>Why no consent banner?</h2>
         <p>
-          Since ShipSafe only uses strictly necessary cookies (required for the Service to function), no consent is required under:
+          Since Hardened only uses strictly necessary cookies (required for the Service to function), no consent is required under:
         </p>
         <ul>
           <li><strong>GDPR</strong> — Article 5(3) of the ePrivacy Directive exempts strictly necessary cookies from consent requirements</li>
@@ -99,7 +99,7 @@ export default function CookiesPage() {
 
         <h2>How to manage cookies</h2>
         <p>
-          You can configure your browser to block or delete cookies. Note that blocking strictly necessary cookies may prevent you from using ShipSafe&apos;s authenticated features.
+          You can configure your browser to block or delete cookies. Note that blocking strictly necessary cookies may prevent you from using Hardened&apos;s authenticated features.
         </p>
         <ul>
           <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Chrome</a></li>
@@ -111,7 +111,7 @@ export default function CookiesPage() {
         <h2>Contact</h2>
         <p>
           For questions about our cookie practices:<br />
-          Email: <a href="mailto:privacy@shipsafe.app">privacy@shipsafe.app</a>
+          Email: <a href="mailto:privacy@hardened.app">privacy@hardened.app</a>
         </p>
       </div>
     </main>

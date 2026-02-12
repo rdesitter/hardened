@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { proxyToHono } from '@/lib/api';
-import { db, users, eq } from '@shipsafe/db';
+import { db, users, eq } from '@hardened/db';
 import Link from 'next/link';
 import { DashboardScans } from './dashboard-scans';
 

@@ -1,4 +1,4 @@
-import type { CheckResult } from '@shipsafe/db';
+import type { CheckResult } from '@hardened/db';
 import { safeFetch } from '../utils.js';
 
 interface PathCheck {

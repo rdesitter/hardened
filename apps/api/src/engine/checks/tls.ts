@@ -1,5 +1,5 @@
 import tls from 'node:tls';
-import type { CheckResult } from '@shipsafe/db';
+import type { CheckResult } from '@hardened/db';
 
 const WEAK_CIPHERS = [
   'RC4', 'DES', '3DES', 'MD5', 'NULL', 'EXPORT', 'anon',

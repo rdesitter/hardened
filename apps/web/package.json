@@ -1,5 +1,5 @@
 {
-  "name": "@shipsafe/web",
+  "name": "@hardened/web",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.10.0",
-    "@shipsafe/db": "*",
+    "@hardened/db": "*",
     "next": "^15.1.0",
     "next-auth": "5.0.0-beta.30",
     "react": "^19.0.0",

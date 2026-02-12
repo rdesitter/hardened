@@ -13,7 +13,7 @@ app.use('*', logger());
 
 // Health check — no auth required
 app.get('/health', (c) => {
-  return c.json({ status: 'ok', service: 'shipsafe-api' });
+  return c.json({ status: 'ok', service: 'hardened-api' });
 });
 
 // Public routes — no auth required
@@ -37,6 +37,6 @@ const port = Number(process.env.PORT) || 4000;
 // Start cron jobs
 scheduleMonitoring();
 
-console.log(`ShipSafe API running on port ${port}`);
+console.log(`Hardened API running on port ${port}`);
 
 serve({ fetch: app.fetch, port });

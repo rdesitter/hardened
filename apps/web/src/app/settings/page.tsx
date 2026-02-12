@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
-import { db, users, eq } from '@shipsafe/db';
+import { db, users, eq } from '@hardened/db';
 import { PortalButton } from './portal-button';
 import { DeleteAccount } from './delete-account';
 

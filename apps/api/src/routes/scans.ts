@@ -1,8 +1,8 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
 import { nanoid } from 'nanoid';
-import { db, scans, reports, eq, and, asc } from '@shipsafe/db';
-import type { CheckResult, ScanResult } from '@shipsafe/db';
+import { db, scans, reports, eq, and, asc } from '@hardened/db';
+import type { CheckResult, ScanResult } from '@hardened/db';
 import { runScan } from '../engine/index.js';
 import { calculateScore } from '../engine/score.js';
 

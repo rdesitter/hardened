@@ -9,7 +9,7 @@ export function Header() {
   return (
     <header className="flex items-center justify-between px-6 py-4">
       <Link href="/" className="text-lg font-bold">
-        Ship<span className="text-green-400">Safe</span>
+        Harden<span className="text-green-400">ed</span>
       </Link>
       <nav className="flex items-center gap-4">
         <Link

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import { db, users, eq } from '@shipsafe/db';
+import { db, users, eq } from '@hardened/db';
 import { createPortalSession } from '@/lib/stripe';
 
 export async function POST() {

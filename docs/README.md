@@ -1,8 +1,8 @@
-# ShipSafe
+# Hardened
 
 ## Vision
 
-ShipSafe est un outil d'audit de sécurité automatique pour les applications web générées par IA (vibecoding). L'utilisateur entre une URL, le système analyse la sécurité de l'application et produit un rapport avec un score sur 100.
+Hardened est un outil d'audit de sécurité automatique pour les applications web générées par IA (vibecoding). L'utilisateur entre une URL, le système analyse la sécurité de l'application et produit un rapport avec un score sur 100.
 
 ## Problème
 

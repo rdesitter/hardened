@@ -1,5 +1,5 @@
 import dns from 'node:dns/promises';
-import type { CheckResult } from '@shipsafe/db';
+import type { CheckResult } from '@hardened/db';
 
 export async function checkDns(url: string): Promise<CheckResult[]> {
   const domain = new URL(url).hostname;

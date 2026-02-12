@@ -1,4 +1,4 @@
-import type { ScanResult, CheckResult } from '@shipsafe/db';
+import type { ScanResult, CheckResult } from '@hardened/db';
 import { calculateSummary } from './score.js';
 import { safeCheck } from './utils.js';
 import { checkHttps } from './checks/https.js';

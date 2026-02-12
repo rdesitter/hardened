@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getStripe } from '@/lib/stripe';
-import { db, users, eq } from '@shipsafe/db';
+import { db, users, eq } from '@hardened/db';
 import type Stripe from 'stripe';
 
 export async function POST(req: NextRequest) {

@@ -1,4 +1,4 @@
-import type { CheckResult } from '@shipsafe/db';
+import type { CheckResult } from '@hardened/db';
 
 const DEFAULT_TIMEOUT = 10_000;
 

@@ -1,18 +1,18 @@
-# Privacy Policy — ShipSafe
+# Privacy Policy — Hardened
 
-*Last updated: [DATE]*
+*Last updated: 2025-02-12*
 
 ## Who we are
 
-ShipSafe is operated by [PRÉNOM NOM], self-employed worker (travailleur autonome) based in Montréal, Québec, Canada.
+Hardened is operated by R&D Solutions Numériques, sole proprietorship registered in Québec, Canada.
 
 **Privacy Officer (Responsable de la protection des renseignements personnels):**
-[PRÉNOM NOM]
-Email: privacy@shipsafe.app
+R&D Solutions Numériques
+Email: privacy@hardened.app
 
-## What ShipSafe does
+## What Hardened does
 
-ShipSafe is an automated security audit tool for web applications. When you submit a URL, we perform publicly accessible security checks (HTTP requests, DNS lookups, TLS handshakes) — the same kind of checks any web browser performs. We do not access private data, user accounts, or databases of the applications we scan.
+Hardened is an automated security audit tool for web applications. When you submit a URL, we perform publicly accessible security checks (HTTP requests, DNS lookups, TLS handshakes) — the same kind of checks any web browser performs. We do not access private data, user accounts, or databases of the applications we scan.
 
 ## What data we collect
 
@@ -63,7 +63,7 @@ We use the following service providers (sub-processors):
 |----------|---------|----------|------------|
 | Stripe | Payment processing | USA / EU | SOC 2 certified, Standard Contractual Clauses |
 | Resend | Transactional emails | USA | Data Processing Agreement available |
-| [HÉBERGEUR] | Hosting | [LOCALISATION] | [GARANTIES] |
+| DigitalOcean, LLC | Hosting | United States | SOC 2 certified, DPA available |
 
 We do not sell, rent, or share your personal data with third parties for marketing purposes.
 
@@ -94,7 +94,7 @@ You have the right to:
 - **Lodge a complaint** with the Commission d'accès à l'information du Québec
 
 ### How to exercise your rights
-Send your request to: privacy@shipsafe.app
+Send your request to: privacy@hardened.app
 
 We will respond within 30 days. We may ask you to verify your identity before processing your request.
 
@@ -103,7 +103,7 @@ You can delete your account at any time from your account settings. This will pe
 
 ## Cookies
 
-ShipSafe uses only **strictly necessary cookies** for authentication (session management). We do not use analytics cookies, advertising cookies, or tracking technologies.
+Hardened uses only **strictly necessary cookies** for authentication (session management). We do not use analytics cookies, advertising cookies, or tracking technologies.
 
 Since we only use strictly necessary cookies, no consent banner is required under GDPR (Article 5.3 of the ePrivacy Directive) or Loi 25.
 
@@ -119,7 +119,7 @@ We take reasonable measures to protect your data:
 
 ## Children
 
-ShipSafe is not directed at children under 16. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us at privacy@shipsafe.app.
+Hardened is not directed at children under 16. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us at privacy@hardened.app.
 
 ## Data breach notification
 
@@ -130,12 +130,12 @@ In the event of a security incident involving your personal data, we will:
 
 ## Changes to this policy
 
-We may update this policy from time to time. We will notify you of significant changes by email or by a notice on our website. Your continued use of ShipSafe after changes constitutes acceptance of the updated policy.
+We may update this policy from time to time. We will notify you of significant changes by email or by a notice on our website. Your continued use of Hardened after changes constitutes acceptance of the updated policy.
 
 ## Contact
 
 For any questions about this privacy policy or your personal data:
 
-[PRÉNOM NOM]
-Email: privacy@shipsafe.app
+R&D Solutions Numériques
+Email: privacy@hardened.app
 Location: Montréal, Québec, Canada

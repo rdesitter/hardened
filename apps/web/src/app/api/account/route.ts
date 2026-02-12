@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import { db, users, eq } from '@shipsafe/db';
+import { db, users, eq } from '@hardened/db';
 import { getStripe } from '@/lib/stripe';
 import { proxyToHono } from '@/lib/api';
 
@@ -32,7 +32,7 @@ export async function DELETE() {
       return NextResponse.json(
         {
           error:
-            'Failed to cancel your subscription. Please resolve any payment issues before deleting your account, or contact support@shipsafe.app.',
+            'Failed to cancel your subscription. Please resolve any payment issues before deleting your account, or contact support@hardened.app.',
         },
         { status: 502 },
       );

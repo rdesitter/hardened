@@ -5,7 +5,7 @@
 Monorepo avec deux apps (Next.js + Hono) et un package partagé pour le schema DB et les types.
 
 ```
-shipsafe/
+hardened/
 ├── docker-compose.yml
 ├── .env.example
 ├── package.json                  # workspace root
@@ -137,12 +137,12 @@ Ce package contient tout ce qui est lié à la base de données :
 - **types.ts** — Types TypeScript pour les résultats de scan, checks, etc.
 - **client.ts** — Initialisation de la connexion Drizzle (lit `DATABASE_URL` depuis env)
 
-Les deux apps (`web` et `api`) importent depuis `@shipsafe/db` :
+Les deux apps (`web` et `api`) importent depuis `@hardened/db` :
 
 ```typescript
-import { users, scans, reports } from '@shipsafe/db';
-import { type CheckResult, type ScanResult } from '@shipsafe/db';
-import { db } from '@shipsafe/db';
+import { users, scans, reports } from '@hardened/db';
+import { type CheckResult, type ScanResult } from '@hardened/db';
+import { db } from '@hardened/db';
 ```
 
 ## Variables d'environnement
@@ -151,11 +151,11 @@ import { db } from '@shipsafe/db';
 
 ```bash
 # Database
-DATABASE_URL=postgresql://shipsafe:password@postgres:5432/shipsafe
+DATABASE_URL=postgresql://hardened:password@postgres:5432/hardened
 
 # Auth.js
 AUTH_SECRET=generate-a-secret
-AUTH_URL=https://shipsafe.app
+AUTH_URL=https://hardened.app
 
 # Resend (email)
 RESEND_API_KEY=re_xxx
@@ -170,7 +170,7 @@ INTERNAL_API_TOKEN=generate-a-secret
 HONO_API_URL=http://hono:4000
 
 # App
-NEXT_PUBLIC_APP_URL=https://shipsafe.app
+NEXT_PUBLIC_APP_URL=https://hardened.app
 ```
 
 ## Docker
@@ -203,8 +203,8 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: shipsafe
-      POSTGRES_USER: shipsafe
+      POSTGRES_DB: hardened
+      POSTGRES_USER: hardened
       POSTGRES_PASSWORD: password
     volumes:
       - pgdata:/var/lib/postgresql/data

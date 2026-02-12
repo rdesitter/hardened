@@ -1,5 +1,5 @@
 import { auth } from '@/lib/auth';
-import { db, users, eq } from '@shipsafe/db';
+import { db, users, eq } from '@hardened/db';
 
 const HONO_API_URL = process.env.HONO_API_URL ?? 'http://api:4000';
 const INTERNAL_API_TOKEN = process.env.INTERNAL_API_TOKEN ?? '';

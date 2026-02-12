@@ -2,7 +2,7 @@
 
 ## Projet
 
-ShipSafe — Audit de sécurité automatique pour apps web générées par IA.
+Hardened — Audit de sécurité automatique pour apps web générées par IA.
 
 ## Documentation
 
@@ -32,13 +32,13 @@ Toute la documentation technique est dans le dossier `/docs/`. Lis TOUS les fich
 ## Structure du monorepo
 
 ```
-shipsafe/
+hardened/
 ├── package.json              # workspace root (npm workspaces)
 ├── tsconfig.json             # TypeScript base config
 ├── docker-compose.yml        # dev: web + api + postgres
 ├── .env                      # variables d'environnement (non committé)
 ├── packages/
-│   └── db/                   # @shipsafe/db — schema Drizzle + types partagés
+│   └── db/                   # @hardened/db — schema Drizzle + types partagés
 │       └── src/ (schema.ts, types.ts, client.ts, index.ts)
 ├── apps/
 │   ├── api/                  # Hono — port 4000
@@ -107,7 +107,7 @@ npm run db:push       # appliquer le schema directement
 - TypeScript strict partout
 - Pas de Supabase
 - Pas de Redis pour le MVP
-- Le package @shipsafe/db est partagé entre les deux apps
+- Le package @hardened/db est partagé entre les deux apps
 - Hono n'est pas exposé publiquement — seul Next.js est accessible depuis l'extérieur
 - Les appels du front vers Hono passent par des Route Handlers Next.js (proxy avec X-Internal-Token)
 - Le proxy enrichit les headers avec X-User-Id et X-User-Plan quand l'utilisateur est authentifié
@@ -134,7 +134,7 @@ npm run db:push       # appliquer le schema directement
   - open-redirects.ts — test de 7 paramètres courants (redirect, next, url, return, returnTo, redirect_uri, continue)
 - apps/web : Next.js App Router, proxy API vers Hono
 - Landing page :
-  - Hero : "Is your AI-built app secure?" + sous-titre + pill badge "Free security audit"
+  - Hero : "Is your app hardened?" + sous-titre + pill badge "Free security audit"
   - Formulaire URL centré avec bouton "Scan now" + spinner loading
   - Section 3 bénéfices (Security Score, Detailed Fixes, Weekly Monitoring) avec icônes SVG
   - Section sample report : score circle SVG (62/100) + 8 checks exemple
@@ -153,7 +153,7 @@ npm run db:push       # appliquer le schema directement
   - Session strategy: database
   - Callback session injectant user.id
   - Pages custom: /auth/signin, /auth/verify
-- Header avec Pricing / Dashboard / Settings / Sign in / Sign out selon l'état de session
+- Header avec logo "Hardened" + Pricing / Dashboard / Settings / Sign in / Sign out selon l'état de session
 - SessionProvider via composant Providers wrappant le layout
 - Dashboard /dashboard protégé (redirect vers /auth/signin si non connecté)
 - Proxy api.ts enrichi : X-User-Id + X-User-Plan (lookup DB) quand authentifié
@@ -208,8 +208,12 @@ npm run db:push       # appliquer le schema directement
   - /cookies : Cookie Policy — tableau des 5 cookies (Auth.js + Stripe), code inline vert
   - Typographie : h1 text-4xl/5xl, h2 mt-16 + border-b séparateur, h3 mt-10, paragraphes leading-relaxed text-gray-300, strong en blanc
   - TOC : rounded-2xl, leading-8, 2 colonnes, hover vert
-  - Placeholders [PRÉNOM NOM], [HÉBERGEUR] etc. à remplacer avant mise en prod
-  - Dates "Last updated: February 12, 2026", URL https://shipsafe.app déjà remplacés
+  - Tous les placeholders légaux résolus (R&D Solutions Numériques, DigitalOcean, adresse, NEQ)
+  - Dates "Last updated: February 12, 2026" dans les pages web, "2025-02-12" dans les docs markdown
+  - URL https://hardened.app, domaine hardened.app partout
+  - Éditeur : R&D Solutions Numériques, 4388 R. Saint-Denis #200, Montréal, QC H2J 2L1, NEQ 2280685357
+  - Hébergeur : DigitalOcean, LLC, 101 Avenue of the Americas, New York, NY 10013
+  - Renommage complet ShipSafe → Hardened effectué (code, docs, configs, package-lock.json, header logo)
   - Footer landing page mis à jour avec liens vers les 4 pages légales
   - Checkbox consentement obligatoire sur /auth/signin : "I agree to the Terms of Service and Privacy Policy"
   - Bouton "Send magic link" désactivé (disabled + opacity) tant que checkbox non cochée
@@ -228,4 +232,3 @@ npm run db:push       # appliquer le schema directement
 
 ### Pas encore fait
 - Page about
-- Remplacer les placeholders [PRÉNOM NOM], [HÉBERGEUR] dans les pages légales

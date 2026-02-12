@@ -63,8 +63,8 @@ export default function HomePage() {
           Free security audit — no signup required
         </div>
         <h1 className="mx-auto max-w-3xl text-5xl font-bold leading-tight tracking-tight sm:text-6xl">
-          Is your AI-built app{' '}
-          <span className="text-green-400">secure</span>?
+          Is your app{' '}
+          <span className="text-green-400">hardened</span>?
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-lg text-gray-400">
           Find out in 15 seconds. Get a detailed security score with
@@ -151,7 +151,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="border-t border-gray-800/50 px-4 py-8">
         <div className="mx-auto flex max-w-4xl items-center justify-between text-xs text-gray-500">
-          <p>ShipSafe — Security audit for AI-generated apps</p>
+          <p>Hardened — Security audit for AI-generated apps</p>
           <div className="flex gap-4">
             <a href="/pricing" className="hover:text-gray-300">Pricing</a>
             <a href="/privacy" className="hover:text-gray-300">Privacy</a>

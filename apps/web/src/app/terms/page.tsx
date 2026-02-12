@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — ShipSafe',
-  description: 'Terms and conditions governing the use of ShipSafe.',
+  title: 'Terms of Service — Hardened',
+  description: 'Terms and conditions governing the use of Hardened.',
 };
 
 const TOC = [
-  { id: 'about', label: 'About ShipSafe' },
+  { id: 'about', label: 'About Hardened' },
   { id: 'description', label: 'Description of the Service' },
   { id: 'accounts', label: 'Accounts' },
   { id: 'plans', label: 'Plans and pricing' },
@@ -57,20 +57,20 @@ export default function TermsPage() {
 
       <div className={PROSE}>
 
-        <h2 id="about">1. About ShipSafe</h2>
+        <h2 id="about">1. About Hardened</h2>
         <p>
-          ShipSafe is an automated security audit tool for web applications, operated by [PRÉNOM NOM], self-employed worker (travailleur autonome) based in Montréal, Québec, Canada.
+          Hardened is an automated security audit tool for web applications, operated by R&amp;D Solutions Numériques, sole proprietorship registered in Québec, Canada.
         </p>
         <p>
-          These Terms of Service (&quot;Terms&quot;) govern your use of ShipSafe (the &quot;Service&quot;) available at <a href="https://shipsafe.app">https://shipsafe.app</a>.
+          These Terms of Service (&quot;Terms&quot;) govern your use of Hardened (the &quot;Service&quot;) available at <a href="https://hardened.app">https://hardened.app</a>.
         </p>
         <p>
-          By using ShipSafe, you agree to these Terms. If you do not agree, please do not use the Service.
+          By using Hardened, you agree to these Terms. If you do not agree, please do not use the Service.
         </p>
 
         <h2 id="description">2. Description of the Service</h2>
         <p>
-          ShipSafe analyzes publicly accessible aspects of web applications to identify potential security issues. Our scans include:
+          Hardened analyzes publicly accessible aspects of web applications to identify potential security issues. Our scans include:
         </p>
         <ul>
           <li>HTTP/HTTPS configuration checks</li>
@@ -82,7 +82,7 @@ export default function TermsPage() {
           <li>TLS/SSL configuration analysis</li>
         </ul>
         <p>
-          <strong>Important:</strong> ShipSafe only performs checks that are publicly accessible — equivalent to what any web browser or HTTP client can observe. ShipSafe does <strong>not</strong>:
+          <strong>Important:</strong> Hardened only performs checks that are publicly accessible — equivalent to what any web browser or HTTP client can observe. Hardened does <strong>not</strong>:
         </p>
         <ul>
           <li>Access private data or databases</li>
@@ -94,14 +94,14 @@ export default function TermsPage() {
         <h2 id="accounts">3. Accounts</h2>
         <h3>3.1 Account creation</h3>
         <p>
-          You may use ShipSafe&apos;s free scan without creating an account. To access the dashboard, scan history, and paid features, you must create an account with a valid email address.
+          You may use Hardened&apos;s free scan without creating an account. To access the dashboard, scan history, and paid features, you must create an account with a valid email address.
         </p>
         <h3>3.2 Account security</h3>
         <p>
-          You are responsible for maintaining the security of your account. Notify us immediately at <a href="mailto:support@shipsafe.app">support@shipsafe.app</a> if you suspect unauthorized access.
+          You are responsible for maintaining the security of your account. Notify us immediately at <a href="mailto:support@hardened.app">support@hardened.app</a> if you suspect unauthorized access.
         </p>
         <h3>3.3 Age requirement</h3>
-        <p>You must be at least 16 years old to use ShipSafe.</p>
+        <p>You must be at least 16 years old to use Hardened.</p>
 
         <h2 id="plans">4. Plans and pricing</h2>
         <h3>4.1 Free plan</h3>
@@ -138,11 +138,11 @@ export default function TermsPage() {
         </p>
         <h3>5.4 Refunds</h3>
         <p>
-          We offer a full refund within 14 days of your first Pro subscription if you are not satisfied. After this period, no refunds are provided for partial billing periods. To request a refund, contact <a href="mailto:support@shipsafe.app">support@shipsafe.app</a>.
+          We offer a full refund within 14 days of your first Pro subscription if you are not satisfied. After this period, no refunds are provided for partial billing periods. To request a refund, contact <a href="mailto:support@hardened.app">support@hardened.app</a>.
         </p>
 
         <h2 id="acceptable-use">6. Acceptable use</h2>
-        <p>You agree to use ShipSafe only to:</p>
+        <p>You agree to use Hardened only to:</p>
         <ul>
           <li>Scan web applications you own or have authorization to test</li>
           <li>Improve the security of your own applications</li>
@@ -150,7 +150,7 @@ export default function TermsPage() {
         <p>You agree <strong>not</strong> to:</p>
         <ul>
           <li>Scan applications without authorization from their owner</li>
-          <li>Use ShipSafe to identify vulnerabilities for malicious purposes</li>
+          <li>Use Hardened to identify vulnerabilities for malicious purposes</li>
           <li>Attempt to overwhelm or disrupt scanned applications through excessive scanning</li>
           <li>Circumvent rate limits or abuse the Service</li>
           <li>Use the Service for any illegal purpose</li>
@@ -161,7 +161,7 @@ export default function TermsPage() {
         <h2 id="ip">7. Intellectual property</h2>
         <h3>7.1 Our content</h3>
         <p>
-          ShipSafe, including its code, design, documentation, and security check methodologies, is our intellectual property. Scan reports are generated for your use and may be shared freely.
+          Hardened, including its code, design, documentation, and security check methodologies, is our intellectual property. Scan reports are generated for your use and may be shared freely.
         </p>
         <h3>7.2 Your content</h3>
         <p>
@@ -171,7 +171,7 @@ export default function TermsPage() {
         <h2 id="disclaimer">8. Disclaimer and limitation of liability</h2>
         <h3>8.1 Service provided &quot;as is&quot;</h3>
         <p>
-          ShipSafe is provided &quot;as is&quot; without warranty of any kind, express or implied. We do not guarantee that:
+          Hardened is provided &quot;as is&quot; without warranty of any kind, express or implied. We do not guarantee that:
         </p>
         <ul>
           <li>Scans will detect all security issues</li>
@@ -180,11 +180,11 @@ export default function TermsPage() {
         </ul>
         <h3>8.2 Not a substitute for professional security audit</h3>
         <p>
-          ShipSafe is an automated tool that checks common security configurations. It is <strong>not</strong> a comprehensive security audit, penetration test, or compliance assessment. For critical applications, we recommend engaging a professional security firm.
+          Hardened is an automated tool that checks common security configurations. It is <strong>not</strong> a comprehensive security audit, penetration test, or compliance assessment. For critical applications, we recommend engaging a professional security firm.
         </p>
         <h3>8.3 Limitation of liability</h3>
         <p>
-          To the maximum extent permitted by law, [PRÉNOM NOM] shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, including but not limited to:
+          To the maximum extent permitted by law, R&amp;D Solutions Numériques shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, including but not limited to:
         </p>
         <ul>
           <li>Security incidents on your applications</li>
@@ -231,8 +231,8 @@ export default function TermsPage() {
         <h2 id="contact">14. Contact</h2>
         <p>For any questions about these Terms:</p>
         <p>
-          [PRÉNOM NOM]<br />
-          Email: <a href="mailto:support@shipsafe.app">support@shipsafe.app</a><br />
+          R&amp;D Solutions Numériques<br />
+          Email: <a href="mailto:support@hardened.app">support@hardened.app</a><br />
           Location: Montréal, Québec, Canada
         </p>
       </div>

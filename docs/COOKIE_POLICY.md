@@ -1,6 +1,6 @@
-# Cookie Policy — ShipSafe
+# Cookie Policy — Hardened
 
-*Last updated: [DATE]*
+*Last updated: 2025-02-12*
 
 ## What are cookies?
 
@@ -8,19 +8,19 @@ Cookies are small text files stored on your device when you visit a website. The
 
 ## Cookies we use
 
-ShipSafe uses only **strictly necessary cookies**. These cookies are essential for the Service to function and cannot be disabled.
+Hardened uses only **strictly necessary cookies**. These cookies are essential for the Service to function and cannot be disabled.
 
 | Cookie | Purpose | Duration | Provider |
 |--------|---------|----------|----------|
-| `authjs.session-token` | Keeps you logged in to your account | 30 days | ShipSafe (Auth.js) |
-| `authjs.csrf-token` | Protects against cross-site request forgery | Session | ShipSafe (Auth.js) |
-| `authjs.callback-url` | Redirects you after login | Session | ShipSafe (Auth.js) |
+| `authjs.session-token` | Keeps you logged in to your account | 30 days | Hardened (Auth.js) |
+| `authjs.csrf-token` | Protects against cross-site request forgery | Session | Hardened (Auth.js) |
+| `authjs.callback-url` | Redirects you after login | Session | Hardened (Auth.js) |
 | `__stripe_mid` | Fraud prevention during payment | 1 year | Stripe |
 | `__stripe_sid` | Fraud prevention during payment | 30 minutes | Stripe |
 
 ## Cookies we do NOT use
 
-ShipSafe does **not** use:
+Hardened does **not** use:
 - Analytics cookies (Google Analytics, Mixpanel, etc.)
 - Advertising or tracking cookies
 - Social media cookies
@@ -28,7 +28,7 @@ ShipSafe does **not** use:
 
 ## Why no consent banner?
 
-Since ShipSafe only uses strictly necessary cookies (required for the Service to function), no consent is required under:
+Since Hardened only uses strictly necessary cookies (required for the Service to function), no consent is required under:
 - **GDPR** — Article 5(3) of the ePrivacy Directive exempts strictly necessary cookies from consent requirements
 - **Loi 25 (Québec)** — Consent is not required for cookies necessary for the provision of a service explicitly requested by the user
 
@@ -36,7 +36,7 @@ If we add non-essential cookies in the future, we will implement a consent mecha
 
 ## How to manage cookies
 
-You can configure your browser to block or delete cookies. Note that blocking strictly necessary cookies may prevent you from using ShipSafe's authenticated features.
+You can configure your browser to block or delete cookies. Note that blocking strictly necessary cookies may prevent you from using Hardened's authenticated features.
 
 - [Chrome](https://support.google.com/chrome/answer/95647)
 - [Firefox](https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer)
@@ -46,4 +46,4 @@ You can configure your browser to block or delete cookies. Note that blocking st
 ## Contact
 
 For questions about our cookie practices:
-Email: privacy@shipsafe.app
+Email: privacy@hardened.app

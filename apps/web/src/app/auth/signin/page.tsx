@@ -30,7 +30,7 @@ export default function SignInPage() {
   return (
     <main className="flex min-h-screen items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-center">Sign in to ShipSafe</h1>
+        <h1 className="text-2xl font-bold text-center">Sign in to Hardened</h1>
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
           <input
             type="email"

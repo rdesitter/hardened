@@ -1,5 +1,5 @@
 {
-  "name": "shipsafe",
+  "name": "hardened",
   "private": true,
   "workspaces": [
     "packages/*",

@@ -1,5 +1,5 @@
 import tls from 'node:tls';
-import type { CheckResult } from '@shipsafe/db';
+import type { CheckResult } from '@hardened/db';
 import { safeFetch } from '../utils.js';
 
 export async function checkHttps(url: string): Promise<CheckResult[]> {

@@ -1,4 +1,4 @@
-# Documentation légale — ShipSafe
+# Documentation légale — Hardened
 
 ## Contexte juridique
 
@@ -13,8 +13,8 @@
 3. **LPRPDE** (Loi sur la protection des renseignements personnels et les documents électroniques) — loi fédérale canadienne, complétée par la Loi 25 au Québec
 4. **CAN-SPAM / LCAP** (Loi canadienne anti-pourriel) — pour les emails transactionnels et marketing
 
-### Particularité ShipSafe
-ShipSafe scanne des URLs publiquement accessibles. Il n'accède à aucune donnée personnelle des utilisateurs des applications scannées. Les scans se limitent à :
+### Particularité Hardened
+Hardened scanne des URLs publiquement accessibles. Il n'accède à aucune donnée personnelle des utilisateurs des applications scannées. Les scans se limitent à :
 - Requêtes HTTP publiques (comme le ferait un navigateur)
 - Vérification de headers de réponse
 - Résolution DNS publique
@@ -24,7 +24,7 @@ C'est important à clarifier dans les CGU et la politique de confidentialité.
 
 ---
 
-## Données collectées par ShipSafe
+## Données collectées par Hardened
 
 ### Données utilisateur (compte)
 | Donnée | Base légale | Finalité | Durée de conservation |
@@ -141,7 +141,7 @@ Liste à inclure dans la Privacy Policy :
 
 1. **Responsable de la protection des renseignements personnels** — Loi 25 exige de désigner une personne responsable. Pour un travailleur autonome, c'est toi. Tu dois publier tes coordonnées.
 
-2. **Évaluation des facteurs relatifs à la vie privée (EFVP)** — Loi 25 l'exige pour tout projet impliquant des renseignements personnels. Pour un MVP simple comme ShipSafe, une évaluation sommaire suffit (documenter les données collectées, les risques, les mesures de protection). Ce document n'a pas besoin d'être public.
+2. **Évaluation des facteurs relatifs à la vie privée (EFVP)** — Loi 25 l'exige pour tout projet impliquant des renseignements personnels. Pour un MVP simple comme Hardened, une évaluation sommaire suffit (documenter les données collectées, les risques, les mesures de protection). Ce document n'a pas besoin d'être public.
 
 3. **Registre des incidents** — Obligatoire Loi 25. Un simple fichier/document pour consigner tout incident de confidentialité (même s'il n'y en a jamais, le registre doit exister).
 

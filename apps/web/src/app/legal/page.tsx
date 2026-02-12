@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Legal Notice — ShipSafe',
-  description: 'Legal notice and mentions légales for ShipSafe.',
+  title: 'Legal Notice — Hardened',
+  description: 'Legal notice and mentions légales for Hardened.',
 };
 
 const PROSE = [
@@ -26,28 +26,31 @@ export default function LegalPage() {
 
         <h2>Editor / Éditeur</h2>
         <p>
-          [PRÉNOM NOM]<br />
-          Travailleur autonome / Self-employed worker<br />
-          Montréal, Québec, Canada
+          R&amp;D Solutions Numériques<br />
+          R&amp;D Solutions Numériques, entreprise individuelle enregistrée au Québec<br />
+          4388 R. Saint-Denis #200<br />
+          Montréal, QC H2J 2L1<br />
+          Canada<br />
+          NEQ : 2280685357
         </p>
         <p>
-          Email: <a href="mailto:contact@shipsafe.app">contact@shipsafe.app</a>
+          Email: <a href="mailto:contact@hardened.app">contact@hardened.app</a>
         </p>
         <p>
-          Publication Director / Directeur de la publication: [PRÉNOM NOM]
+          Publication Director / Directeur de la publication: R&amp;D Solutions Numériques
         </p>
 
         <h2>Hosting / Hébergement</h2>
         <p>
-          [NOM HÉBERGEUR]<br />
-          [ADRESSE HÉBERGEUR]<br />
-          [PAYS HÉBERGEUR]
+          DigitalOcean, LLC<br />
+          101 Avenue of the Americas, New York, NY 10013<br />
+          États-Unis / United States
         </p>
 
         <h2>Privacy Officer / Responsable de la protection des renseignements personnels</h2>
         <p>
-          [PRÉNOM NOM]<br />
-          Email: <a href="mailto:privacy@shipsafe.app">privacy@shipsafe.app</a>
+          R&amp;D Solutions Numériques<br />
+          Email: <a href="mailto:privacy@hardened.app">privacy@hardened.app</a>
         </p>
         <p>
           This designation is made in accordance with Québec&apos;s Loi 25 (Act respecting the protection of personal information in the private sector).
@@ -63,10 +66,10 @@ export default function LegalPage() {
 
         <h2>Intellectual property / Propriété intellectuelle</h2>
         <p>
-          All content on this website (text, graphics, logos, software) is the property of [PRÉNOM NOM] and is protected by applicable intellectual property laws. Reproduction without authorization is prohibited.
+          All content on this website (text, graphics, logos, software) is the property of R&amp;D Solutions Numériques and is protected by applicable intellectual property laws. Reproduction without authorization is prohibited.
         </p>
         <p>
-          Tout le contenu de ce site (textes, graphismes, logos, logiciels) est la propriété de [PRÉNOM NOM] et est protégé par les lois applicables en matière de propriété intellectuelle. Toute reproduction sans autorisation est interdite.
+          Tout le contenu de ce site (textes, graphismes, logos, logiciels) est la propriété de R&amp;D Solutions Numériques et est protégé par les lois applicables en matière de propriété intellectuelle. Toute reproduction sans autorisation est interdite.
         </p>
       </div>
     </main>

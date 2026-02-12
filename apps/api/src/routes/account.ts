@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { db, users, scans, reports, sessions, accounts, eq } from '@shipsafe/db';
+import { db, users, scans, reports, sessions, accounts, eq } from '@hardened/db';
 import { inArray } from 'drizzle-orm';
 
 const deleteStore = new Map<string, number>();

@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — ShipSafe',
-  description: 'How ShipSafe collects, uses, and protects your personal data.',
+  title: 'Privacy Policy — Hardened',
+  description: 'How Hardened collects, uses, and protects your personal data.',
 };
 
 const TOC = [
   { id: 'who-we-are', label: 'Who we are' },
-  { id: 'what-shipsafe-does', label: 'What ShipSafe does' },
+  { id: 'what-hardened-does', label: 'What Hardened does' },
   { id: 'what-data-we-collect', label: 'What data we collect' },
   { id: 'why-we-collect', label: 'Why we collect this data' },
   { id: 'how-long', label: 'How long we keep your data' },
@@ -63,17 +63,17 @@ export default function PrivacyPage() {
 
         <h2 id="who-we-are">Who we are</h2>
         <p>
-          ShipSafe is operated by [PRÉNOM NOM], self-employed worker (travailleur autonome) based in Montréal, Québec, Canada.
+          Hardened is operated by R&amp;D Solutions Numériques, sole proprietorship registered in Québec, Canada.
         </p>
         <p>
           <strong>Privacy Officer (Responsable de la protection des renseignements personnels):</strong><br />
-          [PRÉNOM NOM]<br />
-          Email: <a href="mailto:privacy@shipsafe.app">privacy@shipsafe.app</a>
+          R&amp;D Solutions Numériques<br />
+          Email: <a href="mailto:privacy@hardened.app">privacy@hardened.app</a>
         </p>
 
-        <h2 id="what-shipsafe-does">What ShipSafe does</h2>
+        <h2 id="what-hardened-does">What Hardened does</h2>
         <p>
-          ShipSafe is an automated security audit tool for web applications. When you submit a URL, we perform publicly accessible security checks (HTTP requests, DNS lookups, TLS handshakes) — the same kind of checks any web browser performs. We do not access private data, user accounts, or databases of the applications we scan.
+          Hardened is an automated security audit tool for web applications. When you submit a URL, we perform publicly accessible security checks (HTTP requests, DNS lookups, TLS handshakes) — the same kind of checks any web browser performs. We do not access private data, user accounts, or databases of the applications we scan.
         </p>
 
         <h2 id="what-data-we-collect">What data we collect</h2>
@@ -142,7 +142,7 @@ export default function PrivacyPage() {
           <tbody>
             <tr><td>Stripe</td><td>Payment processing</td><td>USA / EU</td><td>SOC 2 certified, SCCs</td></tr>
             <tr><td>Resend</td><td>Transactional emails</td><td>USA</td><td>DPA available</td></tr>
-            <tr><td>[HÉBERGEUR]</td><td>Hosting</td><td>[LOCALISATION]</td><td>[GARANTIES]</td></tr>
+            <tr><td>DigitalOcean, LLC</td><td>Hosting</td><td>United States</td><td>SOC 2 certified, DPA available</td></tr>
           </tbody>
         </table>
         <p>We do not sell, rent, or share your personal data with third parties for marketing purposes.</p>
@@ -180,7 +180,7 @@ export default function PrivacyPage() {
 
         <h3>How to exercise your rights</h3>
         <p>
-          Send your request to: <a href="mailto:privacy@shipsafe.app">privacy@shipsafe.app</a>
+          Send your request to: <a href="mailto:privacy@hardened.app">privacy@hardened.app</a>
         </p>
         <p>
           We will respond within 30 days. We may ask you to verify your identity before processing your request.
@@ -193,7 +193,7 @@ export default function PrivacyPage() {
 
         <h2 id="cookies">Cookies</h2>
         <p>
-          ShipSafe uses only <strong>strictly necessary cookies</strong> for authentication (session management). We do not use analytics cookies, advertising cookies, or tracking technologies.
+          Hardened uses only <strong>strictly necessary cookies</strong> for authentication (session management). We do not use analytics cookies, advertising cookies, or tracking technologies.
         </p>
         <p>
           Since we only use strictly necessary cookies, no consent banner is required under GDPR (Article 5.3 of the ePrivacy Directive) or Loi 25.
@@ -216,7 +216,7 @@ export default function PrivacyPage() {
 
         <h2 id="children">Children</h2>
         <p>
-          ShipSafe is not directed at children under 16. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us at <a href="mailto:privacy@shipsafe.app">privacy@shipsafe.app</a>.
+          Hardened is not directed at children under 16. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us at <a href="mailto:privacy@hardened.app">privacy@hardened.app</a>.
         </p>
 
         <h2 id="data-breach">Data breach notification</h2>
@@ -229,7 +229,7 @@ export default function PrivacyPage() {
 
         <h2 id="changes">Changes to this policy</h2>
         <p>
-          We may update this policy from time to time. We will notify you of significant changes by email or by a notice on our website. Your continued use of ShipSafe after changes constitutes acceptance of the updated policy.
+          We may update this policy from time to time. We will notify you of significant changes by email or by a notice on our website. Your continued use of Hardened after changes constitutes acceptance of the updated policy.
         </p>
 
         <h2 id="contact">Contact</h2>
@@ -237,8 +237,8 @@ export default function PrivacyPage() {
           For any questions about this privacy policy or your personal data:
         </p>
         <p>
-          [PRÉNOM NOM]<br />
-          Email: <a href="mailto:privacy@shipsafe.app">privacy@shipsafe.app</a><br />
+          R&amp;D Solutions Numériques<br />
+          Email: <a href="mailto:privacy@hardened.app">privacy@hardened.app</a><br />
           Location: Montréal, Québec, Canada
         </p>
       </div>

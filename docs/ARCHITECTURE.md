@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-ShipSafe est composé de 3 services déployés en containers Docker :
+Hardened est composé de 3 services déployés en containers Docker :
 
 ```
 ┌─────────────────────────┐     ┌─────────────────────────┐     ┌────────────┐

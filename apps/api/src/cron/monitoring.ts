@@ -1,14 +1,14 @@
 import cron from 'node-cron';
 import { Resend } from 'resend';
 import { nanoid } from 'nanoid';
-import { db, users, scans, reports, eq, and, desc, sql } from '@shipsafe/db';
-import type { CheckResult, ScanResult } from '@shipsafe/db';
+import { db, users, scans, reports, eq, and, desc, sql } from '@hardened/db';
+import type { CheckResult, ScanResult } from '@hardened/db';
 import { runScan } from '../engine/index.js';
 import { calculateScore } from '../engine/score.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
-const EMAIL_FROM = process.env.AUTH_EMAIL_FROM ?? 'ShipSafe <onboarding@resend.dev>';
+const EMAIL_FROM = process.env.AUTH_EMAIL_FROM ?? 'Hardened <onboarding@resend.dev>';
 
 interface Regression {
   id: string;
@@ -164,14 +164,14 @@ ${regressionList}
 View the full report: ${reportUrl}
 
 ---
-ShipSafe Weekly Monitoring
+Hardened Weekly Monitoring
 You receive this email because you have an active Pro subscription.`;
 
   try {
     await resend.emails.send({
       from: EMAIL_FROM,
       to,
-      subject: `⚠️ ShipSafe: Security regression detected on ${url}`,
+      subject: `⚠️ Hardened: Security regression detected on ${url}`,
       text,
     });
     console.log(`[monitoring] Alert email sent to ${to} for ${url}`);

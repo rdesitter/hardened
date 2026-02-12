@@ -30,7 +30,7 @@
 - Rate limit élevé : 50 scans/heure
 - Scans illimités (dans la limite du rate limit)
 
-**Objectif :** Rétention. La valeur récurrente vient du monitoring et des alertes. L'utilisateur n'a rien à faire — ShipSafe surveille pour lui et le prévient si quelque chose casse.
+**Objectif :** Rétention. La valeur récurrente vient du monitoring et des alertes. L'utilisateur n'a rien à faire — Hardened surveille pour lui et le prévient si quelque chose casse.
 
 ## Implémentation Stripe
 

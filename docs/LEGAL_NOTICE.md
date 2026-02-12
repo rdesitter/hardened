@@ -1,25 +1,28 @@
-# Legal Notice / Mentions légales — ShipSafe
+# Legal Notice / Mentions légales — Hardened
 
 ## Editor / Éditeur
 
-[PRÉNOM NOM]
-Travailleur autonome / Self-employed worker
-Montréal, Québec, Canada
+R&D Solutions Numériques
+R&D Solutions Numériques, entreprise individuelle enregistrée au Québec
+4388 R. Saint-Denis #200
+Montréal, QC H2J 2L1
+Canada
+NEQ : 2280685357
 
-Email: contact@shipsafe.app
+Email: contact@hardened.app
 
-Publication Director / Directeur de la publication: [PRÉNOM NOM]
+Publication Director / Directeur de la publication: R&D Solutions Numériques
 
 ## Hosting / Hébergement
 
-[NOM HÉBERGEUR]
-[ADRESSE HÉBERGEUR]
-[PAYS HÉBERGEUR]
+DigitalOcean, LLC
+101 Avenue of the Americas, New York, NY 10013
+États-Unis / United States
 
 ## Privacy Officer / Responsable de la protection des renseignements personnels
 
-[PRÉNOM NOM]
-Email: privacy@shipsafe.app
+R&D Solutions Numériques
+Email: privacy@hardened.app
 
 This designation is made in accordance with Québec's Loi 25 (Act respecting the protection of personal information in the private sector).
 
@@ -30,6 +33,6 @@ Ce site est régi par les lois de la province de Québec et les lois fédérales
 
 ## Intellectual property / Propriété intellectuelle
 
-All content on this website (text, graphics, logos, software) is the property of [PRÉNOM NOM] and is protected by applicable intellectual property laws. Reproduction without authorization is prohibited.
+All content on this website (text, graphics, logos, software) is the property of R&D Solutions Numériques and is protected by applicable intellectual property laws. Reproduction without authorization is prohibited.
 
-Tout le contenu de ce site (textes, graphismes, logos, logiciels) est la propriété de [PRÉNOM NOM] et est protégé par les lois applicables en matière de propriété intellectuelle. Toute reproduction sans autorisation est interdite.
+Tout le contenu de ce site (textes, graphismes, logos, logiciels) est la propriété de R&D Solutions Numériques et est protégé par les lois applicables en matière de propriété intellectuelle. Toute reproduction sans autorisation est interdite.
