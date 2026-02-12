@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { ScanForm } from '@/components/scan-form';
+import { DeletedToast } from '@/components/deleted-toast';
 
 const BENEFITS = [
   {
@@ -50,6 +52,10 @@ function categoryColor(category: string): string {
 export default function HomePage() {
   return (
     <>
+      <Suspense>
+        <DeletedToast />
+      </Suspense>
+
       {/* Hero */}
       <section className="flex flex-col items-center px-4 pb-24 pt-20 text-center">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-400/20 bg-green-400/5 px-4 py-1.5 text-sm text-green-400">

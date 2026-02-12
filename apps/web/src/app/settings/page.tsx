@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { db, users, eq } from '@shipsafe/db';
 import { PortalButton } from './portal-button';
+import { DeleteAccount } from './delete-account';
 
 export default async function SettingsPage() {
   const session = await auth();
@@ -49,6 +50,8 @@ export default async function SettingsPage() {
           )}
         </div>
       </div>
+
+      <DeleteAccount />
     </main>
   );
 }

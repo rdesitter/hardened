@@ -46,7 +46,7 @@ shipsafe/
 │   │   └── src/
 │   │       ├── index.ts
 │   │       ├── middleware/ (auth.ts, rate-limit.ts)
-│   │       ├── routes/ (scans.ts, reports.ts)
+│   │       ├── routes/ (scans.ts, reports.ts, account.ts)
 │   │       ├── cron/ (monitoring.ts)
 │   │       └── engine/
 │   │           ├── index.ts (runScan orchestrateur)
@@ -67,15 +67,16 @@ shipsafe/
 │           │   ├── legal/page.tsx (mentions légales SSR bilingue)
 │           │   ├── cookies/page.tsx (politique cookies SSR)
 │           │   ├── pricing/page.tsx (page tarifs Free / Pro)
-│           │   ├── settings/page.tsx + portal-button.tsx (compte + billing)
+│           │   ├── settings/page.tsx + portal-button.tsx + delete-account.tsx (compte + billing + suppression)
 │           │   ├── api/auth/[...nextauth]/route.ts (Auth.js handlers)
 │           │   ├── api/checkout/route.ts (crée Stripe Checkout session)
 │           │   ├── api/portal/route.ts (crée Stripe Customer Portal session)
 │           │   ├── api/webhooks/stripe/route.ts (webhook Stripe signé)
+│           │   ├── api/account/route.ts (DELETE suppression compte + annulation Stripe)
 │           │   ├── api/scans/ (proxy routes vers Hono)
 │           │   ├── api/reports/[token]/route.ts (proxy public vers Hono)
 │           │   └── report/[token]/ (page.tsx SSR + report-view.tsx client)
-│           ├── components/ (scan-form.tsx, header.tsx, providers.tsx, score-sparkline.tsx, score-history-chart.tsx)
+│           ├── components/ (scan-form.tsx, header.tsx, providers.tsx, score-sparkline.tsx, score-history-chart.tsx, deleted-toast.tsx)
 │           └── lib/ (api.ts, auth.ts, stripe.ts)
 ```
 
@@ -117,7 +118,7 @@ npm run db:push       # appliquer le schema directement
 
 ### Fait
 - Monorepo initialisé (npm workspaces, tsconfig, .env)
-- packages/db : schema Drizzle (users, scans, reports), types (CheckResult, ScanResult), client, re-export drizzle-orm helpers (eq, and, desc, etc.)
+- packages/db : schema Drizzle (users, scans, reports), types (CheckResult, ScanResult), client, re-export drizzle-orm helpers (eq, and, desc, inArray, etc.)
 - apps/api : Hono avec health check, middleware auth interne, middleware rate-limit
 - apps/api : routes scans (POST /api/scans, GET /api/scans/:id, GET /api/scans, GET /api/scans?url={url}&history=true) avec intégration DB
 - apps/api : scan engine avec 10 checks implémentés (26 vérifications individuelles) :
@@ -213,6 +214,17 @@ npm run db:push       # appliquer le schema directement
   - Checkbox consentement obligatoire sur /auth/signin : "I agree to the Terms of Service and Privacy Policy"
   - Bouton "Send magic link" désactivé (disabled + opacity) tant que checkbox non cochée
   - Liens Terms/Privacy ouvrent dans un nouvel onglet (target="_blank")
+- Suppression de compte (RGPD + Loi 25) :
+  - Hono DELETE /api/account : transaction supprimant reports → scans → sessions → accounts → user
+  - Rate limit intégré : 1 appel/heure/user (store in-memory séparé du rate-limit global)
+  - Log [ACCOUNT_DELETED] avec user_id, email, timestamp pour traçabilité
+  - Next.js DELETE /api/account : vérifie session, annule abonnement Stripe (immédiat), proxy vers Hono
+  - Si annulation Stripe échoue → erreur 502, compte non supprimé (l'utilisateur doit résoudre d'abord)
+  - Page /settings : section "Danger Zone" rouge avec bouton "Delete my account"
+  - Modale de confirmation : texte d'avertissement, champ saisie "DELETE", bouton désactivé tant que pas tapé
+  - Après suppression : signOut() → redirect /?deleted=true
+  - Toast sur landing page : "Your account has been deleted" (auto-dismiss 6s, Suspense boundary)
+  - Les données de paiement Stripe sont conservées côté Stripe (obligation fiscale 6 ans)
 
 ### Pas encore fait
 - Page about

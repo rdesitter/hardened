@@ -4,6 +4,7 @@ import { logger } from 'hono/logger';
 import { internalAuth } from './middleware/auth.js';
 import { scansRouter } from './routes/scans.js';
 import { reportsRouter } from './routes/reports.js';
+import { accountRouter } from './routes/account.js';
 import { scheduleMonitoring, runMonitoring } from './cron/monitoring.js';
 
 const app = new Hono();
@@ -23,6 +24,7 @@ app.use('/api/*', internalAuth);
 
 // Routes
 app.route('/api/scans', scansRouter);
+app.route('/api/account', accountRouter);
 
 // Debug endpoint — trigger monitoring manually (remove before prod)
 app.get('/api/debug/run-monitoring', async (c) => {
