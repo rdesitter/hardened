@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00c951" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#00a040" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="innerGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00c951" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00c951" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="#030712"/>
+
+  <!-- Shield body -->
+  <path d="M256 72 L400 136 L400 264 C400 348 336 420 256 448 C176 420 112 348 112 264 L112 136 Z"
+        fill="none"
+        stroke="url(#shieldGrad)"
+        stroke-width="16"
+        stroke-linejoin="round"/>
+
+  <!-- Shield inner fill -->
+  <path d="M256 88 L388 148 L388 264 C388 340 328 408 256 434 C184 408 124 340 124 264 L124 148 Z"
+        fill="url(#innerGlow)"/>
+
+  <!-- Center horizontal line — "hardened" crack/forge mark -->
+  <line x1="160" y1="248" x2="352" y2="248"
+        stroke="#00c951"
+        stroke-width="3"
+        stroke-opacity="0.25"
+        stroke-dasharray="8 6"/>
+
+  <!-- Checkmark -->
+  <polyline points="196,256 236,304 316,208"
+            fill="none"
+            stroke="#00c951"
+            stroke-width="24"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+</svg>
