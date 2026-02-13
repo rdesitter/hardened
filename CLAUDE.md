@@ -76,7 +76,7 @@ hardened/
 │           │   ├── api/scans/ (proxy routes vers Hono)
 │           │   ├── api/reports/[token]/route.ts (proxy public vers Hono)
 │           │   └── report/[token]/ (page.tsx SSR + report-view.tsx client)
-│           ├── components/ (scan-form.tsx, header.tsx, providers.tsx, score-sparkline.tsx, score-history-chart.tsx, deleted-toast.tsx)
+│           ├── components/ (scan-form.tsx, header.tsx, providers.tsx, score-sparkline.tsx, score-history-chart.tsx, deleted-toast.tsx, checkout-success-modal.tsx)
 │           └── lib/ (api.ts, auth.ts, stripe.ts)
 ```
 
@@ -229,6 +229,28 @@ npm run db:push       # appliquer le schema directement
   - Après suppression : signOut() → redirect /?deleted=true
   - Toast sur landing page : "Your account has been deleted" (auto-dismiss 6s, Suspense boundary)
   - Les données de paiement Stripe sont conservées côté Stripe (obligation fiscale 6 ans)
+- Resend lazy init dans cron/monitoring.ts (getResend() au lieu de new Resend() au top-level) pour éviter crash si RESEND_API_KEY absente au démarrage
+- Modale de confirmation Pro checkout :
+  - checkout-success-modal.tsx : détecte ?checkout=success, affiche modale "Welcome to Pro!" avec liste des features débloquées
+  - Intégrée dans dashboard/page.tsx avec Suspense (même pattern que DeletedToast)
+  - Nettoie l'URL via replaceState après affichage
+- Security headers configurés dans next.config.ts :
+  - Strict-Transport-Security (HSTS, max-age=2ans, includeSubDomains, preload)
+  - Content-Security-Policy (self + Stripe JS/API/frames + unsafe-inline pour styles)
+  - X-Frame-Options (SAMEORIGIN)
+  - X-Content-Type-Options (nosniff)
+  - Referrer-Policy (strict-origin-when-cross-origin)
+  - Permissions-Policy (camera, microphone, geolocation désactivés)
+  - poweredByHeader: false (déjà en place)
+- security.txt : public/.well-known/security.txt (contact, expires, canonical)
+- Déploiement Dokploy :
+  - DNS configuré chez OVH (hardened.app → VPS)
+  - 3 services Docker créés et buildent (web, api, postgres)
+  - SSL Let's Encrypt via Traefik (géré par Dokploy)
+  - Swap 2GB ajouté sur le VPS (évite OOM pendant build Next.js)
+  - Variables d'environnement à configurer dans Dokploy UI pour web et api
+  - Migration DB via tunnel SSH (drizzle-kit push depuis local)
 
 ### Pas encore fait
 - Page about
+- Webhook Stripe production (configurer endpoint + STRIPE_WEBHOOK_SECRET dans Dokploy)
