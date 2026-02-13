@@ -1,9 +1,11 @@
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 import { auth } from '@/lib/auth';
 import { proxyToHono } from '@/lib/api';
 import { db, users, eq } from '@hardened/db';
 import Link from 'next/link';
 import { DashboardScans } from './dashboard-scans';
+import { CheckoutSuccessModal } from '@/components/checkout-success-modal';
 
 interface ScanItem {
   id: string;
@@ -48,6 +50,9 @@ export default async function DashboardPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
+      <Suspense>
+        <CheckoutSuccessModal />
+      </Suspense>
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Dashboard</h1>

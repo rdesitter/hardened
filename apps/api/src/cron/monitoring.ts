@@ -1,12 +1,19 @@
 import cron from 'node-cron';
 import { Resend } from 'resend';
 import { nanoid } from 'nanoid';
-import { db, users, scans, reports, eq, and, desc, sql } from '@hardened/db';
+import { db, users, scans, reports, eq, and, desc } from '@hardened/db';
 import type { CheckResult, ScanResult } from '@hardened/db';
 import { runScan } from '../engine/index.js';
 import { calculateScore } from '../engine/score.js';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let _resend: Resend | null = null;
+function getResend() {
+  if (!_resend) {
+    _resend = new Resend(process.env.RESEND_API_KEY!);
+  }
+  return _resend;
+}
+
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
 const EMAIL_FROM = process.env.AUTH_EMAIL_FROM ?? 'Hardened <onboarding@resend.dev>';
 
@@ -168,7 +175,7 @@ Hardened Weekly Monitoring
 You receive this email because you have an active Pro subscription.`;
 
   try {
-    await resend.emails.send({
+    await getResend().emails.send({
       from: EMAIL_FROM,
       to,
       subject: `⚠️ Hardened: Security regression detected on ${url}`,
