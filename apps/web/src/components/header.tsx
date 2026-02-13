@@ -26,7 +26,9 @@ export function Header() {
           <line x1="160" y1="248" x2="352" y2="248" stroke="#00c951" strokeWidth="3" strokeOpacity="0.25" strokeDasharray="8 6"/>
           <polyline points="196,256 236,304 316,208" fill="none" stroke="#00c951" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
-        Harden<span className="text-green-400">ed</span>
+        <span className="flex items-center">
+          Harden<span className="text-green-400">ed</span>
+        </span>
       </Link>
       <nav className="flex items-center gap-4">
         <Link

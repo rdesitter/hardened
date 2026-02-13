@@ -193,7 +193,7 @@ export function ReportView({ report }: { report: ReportData }) {
         <p className="text-xs text-gray-600">
           Scanned with{' '}
           <a href="/" className="text-green-400 hover:underline">Hardened</a>
-          {' '}— Free security audit for AI-generated apps
+          {' '}— Free security audit for apps
         </p>
       </div>
     </main>

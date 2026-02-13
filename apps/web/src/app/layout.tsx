@@ -4,9 +4,9 @@ import { Header } from '@/components/header';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Hardened — Security Audit for AI-Generated Apps',
+  title: 'Hardened — Security Audit for Apps',
   description:
-    'Automated security scanning for web apps built with AI. Get your security score in seconds.',
+    'Automated security scanning for web apps. Get your security score in seconds.',
 };
 
 export default function RootLayout({

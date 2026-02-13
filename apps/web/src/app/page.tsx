@@ -151,7 +151,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="border-t border-gray-800/50 px-4 py-8">
         <div className="mx-auto flex max-w-4xl items-center justify-between text-xs text-gray-500">
-          <p>Hardened — Security audit for AI-generated apps</p>
+          <p>Hardened — Security audit for apps</p>
           <div className="flex gap-4">
             <a href="/pricing" className="hover:text-gray-300">Pricing</a>
             <a href="/privacy" className="hover:text-gray-300">Privacy</a>
