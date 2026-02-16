@@ -93,9 +93,11 @@ function CheckItem({ check }: { check: CheckResult }) {
           {check.passed ? '✓' : '✗'}
         </span>
         <span className="flex-1 text-sm font-medium">{check.label}</span>
-        <span className={`rounded-full px-2 py-0.5 text-xs ${categoryBadge(check.category)}`}>
-          {check.category}
-        </span>
+        {!check.passed && (
+          <span className={`rounded-full px-2 py-0.5 text-xs ${categoryBadge(check.category)}`}>
+            {check.category}
+          </span>
+        )}
         {hasExpandable && (
           <svg
             className={`h-4 w-4 shrink-0 text-gray-500 transition-transform ${expanded ? 'rotate-180' : ''}`}

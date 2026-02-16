@@ -144,6 +144,7 @@ npm run db:push       # appliquer le schema directement
   - URL + résumé (passed/failed/ms) + bouton Share avec icône
   - Checks groupés par catégorie (Transport, Headers, CORS, Cookies, Exposure, DNS) avec compteur pass/total
   - Chaque check : expandable (chevron), détail, fix en bloc code (Pro) ou CTA upgrade (Free)
+  - Badges de sévérité (critical, warning, info) affichés uniquement sur les tests échoués
   - Poll GET /api/scans/:id toutes les 2s, loader shield animé pendant pending/running
 - Docker : docker-compose.yml + Dockerfiles, tout fonctionne avec `docker compose up`
 - Schema Drizzle poussé en DB via `drizzle-kit push`
@@ -178,6 +179,7 @@ npm run db:push       # appliquer le schema directement
   - GET /api/reports/:token (Hono, public, sans auth) retourne le scan complet AVEC fixes (vitrine)
   - Page /report/[token] : SSR avec generateMetadata() pour les OG tags (titre, description, Twitter card)
   - report-view.tsx : composant client affichant score + checks + fixes complets
+  - Badges de sévérité (critical, warning, info) affichés uniquement sur les tests échoués
   - Bouton "Share report" sur /scan/[id] qui copie l'URL publique dans le presse-papier
 - Monitoring automatique Pro :
   - cron/monitoring.ts : job node-cron tous les lundis 6h UTC
