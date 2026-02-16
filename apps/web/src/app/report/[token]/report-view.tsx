@@ -99,10 +99,16 @@ function CheckItem({ check }: { check: CheckResult }) {
       {expanded && (
         <div className="border-t border-gray-800 px-4 py-3">
           <p className="text-sm text-gray-400">{check.detail}</p>
-          {!check.passed && check.fix && (
-            <pre className="mt-3 overflow-x-auto rounded-lg bg-gray-950 p-3 text-xs leading-relaxed text-gray-300">
-              {check.fix}
-            </pre>
+          {!check.passed && (
+            <a
+              href="/pricing"
+              className="mt-3 inline-flex items-center gap-1 rounded-lg bg-green-500/10 px-3 py-1.5 text-xs font-medium text-green-400 ring-1 ring-green-500/20 transition-colors hover:bg-green-500/20"
+            >
+              Upgrade to Pro to see the fix
+              <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
           )}
         </div>
       )}

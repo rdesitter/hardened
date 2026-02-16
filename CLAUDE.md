@@ -176,10 +176,10 @@ npm run db:push       # appliquer le schema directement
 - Rapports publics :
   - À la fin d'un scan (status completed), un report est créé automatiquement avec un publicToken (nanoid 32 chars)
   - GET /api/scans/:id retourne report_token dans la réponse
-  - GET /api/reports/:token (Hono, public, sans auth) retourne le scan complet AVEC fixes (vitrine)
+  - GET /api/reports/:token (Hono, public, sans auth) retourne le scan complet avec fixes dans le JSON
   - Page /report/[token] : SSR avec generateMetadata() pour les OG tags (titre, description, Twitter card)
-  - report-view.tsx : composant client affichant score + checks + fixes complets
-  - Badges de sévérité (critical, warning, info) affichés uniquement sur les tests échoués
+  - report-view.tsx : composant client affichant score + checks + détails, fixes masqués côté UI avec CTA "Upgrade to Pro to see the fix" (lien vers /pricing)
+  - Badges de sévérité (critical, warning, info) affichés uniquement sur les tests échoués (!check.passed)
   - Bouton "Share report" sur /scan/[id] qui copie l'URL publique dans le presse-papier
 - Monitoring automatique Pro :
   - cron/monitoring.ts : job node-cron tous les lundis 6h UTC
